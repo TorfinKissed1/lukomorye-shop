@@ -1,0 +1,259 @@
+/* ============================================================
+   journal.css — Журнал: editorial post-card teaser grid
+   «Лукоморье» · content + commerce on one surface
+   Section surface: default --alabaster (no bg override).
+   3-up equal columns → 2-col tablet → 1-col mobile.
+   IMAGE RULE: .post__media MUST carry .u-img + .u-img--land
+   (4/3 ratio) so the img is absolute-inset cover — never static.
+   Reveal: only .is-revealed toggled; no transitions here.
+   ============================================================ */
+
+/* ---- Section head: eyebrow+title left / lead right (asymmetric) ---- */
+.journal__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-md) clamp(2rem, 6vw, 5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  border-bottom: var(--bd-hair);
+  padding-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.journal__head > div:first-child {
+  /* eyebrow + h2 stack; constrain heading width */
+  flex: 0 1 auto;
+}
+
+.journal__head .section__title {
+  max-width: 18ch;
+}
+
+/* Lead pulled to the right — no margin-top since head uses align:flex-end */
+.journal__head .section__lead {
+  flex: 0 1 42ch;
+  margin-top: 0;
+  align-self: flex-end;
+}
+
+/* ---- Grid: 3 equal columns, generous gallery gap ---- */
+.journal__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+}
+
+/* ---- Reveal stagger on grid children (nth-child mirrors breakpoint overrides) ---- */
+.journal__grid > .post:nth-child(1) { --reveal-delay: 0ms; }
+.journal__grid > .post:nth-child(2) { --reveal-delay: 80ms; }
+.journal__grid > .post:nth-child(3) { --reveal-delay: 160ms; }
+
+/* ---- Post card ---- */
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  /* hairline at bottom — visible on mobile where gap is replaced by border */
+  border-bottom: var(--bd-hair);
+  padding-bottom: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+/* At wide (grid), bottom border looks busy — suppress on last child only if 3-col */
+.journal__grid > .post:nth-child(3) {
+  border-bottom: none;
+}
+
+/* ---- Post media: always .u-img .u-img--land (4/3) set in HTML ----
+   No position/overflow rules here — .u-img owns those in base.css.
+   We only add radius and the hover-zoom transition on the inner img.      */
+.post__media {
+  border-radius: var(--radius);
+  /* fine-art frame: 1px warm hairline around photo */
+  box-shadow: 0 0 0 1px var(--line-soft);
+}
+
+.post__media > img {
+  transition: transform 1.1s var(--ease);
+}
+
+.post:hover .post__media > img,
+.post__media:focus-within > img {
+  transform: scale(1.04);
+}
+
+/* ---- Post body ---- */
+.post__body {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  padding-top: var(--sp-sm);
+  flex: 1;           /* grow so .post__more is always at bottom */
+}
+
+/* ---- Post title (warm legible serif, not bold — fine-art editorial) ---- */
+.post__title {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: clamp(1.15rem, 1.02rem + .6vw, 1.5rem);
+  line-height: var(--lh-snug);
+  letter-spacing: -.005em;
+  color: var(--ink);
+  text-wrap: balance;
+  margin: 0;
+}
+
+.post__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.post__title a:hover {
+  color: var(--clay-deep);
+}
+
+/* ---- Excerpt ---- */
+.post__excerpt {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 400;
+  line-height: 1.58;
+  color: var(--ink-soft);
+  max-width: 46ch;
+  flex: 1;
+}
+
+/* ---- "Читать" label with animated arrow — .u-label already set in HTML ---- */
+.post__more {
+  /* inherits .u-label styles from base.css (Montserrat 600 small-caps) */
+  display: inline-flex;
+  align-items: center;
+  gap: .35em;
+  margin-top: var(--sp-sm);
+  color: var(--clay-deep);
+  text-decoration: none;
+  /* override .u-label's sage-deep color */
+  color: var(--clay-deep);
+}
+
+.post__more::after {
+  content: "→";
+  display: inline-block;
+  transition: transform var(--dur-fast) var(--ease);
+  transform: translateX(0);
+  line-height: 1;
+}
+
+.post:hover .post__more::after {
+  transform: translateX(.3em);
+}
+
+/* Focus ring on the media link — no outline-offset fight with border-radius */
+.post__media:focus-visible {
+  outline: 2.5px solid var(--clay);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Responsive — mobile overrides REUSE the SAME nth-child
+   selectors to avoid specificity conflicts.
+   ============================================================ */
+
+/* ---- Tablet: 2-column ---- */
+@media (max-width: 860px) {
+  .journal__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  /* 3 items in 2 cols: card 1 & 2 share row 1; card 3 goes full-width */
+  .journal__grid > .post:nth-child(1) { grid-column: span 1; }
+  .journal__grid > .post:nth-child(2) { grid-column: span 1; }
+  .journal__grid > .post:nth-child(3) {
+    grid-column: span 2;
+    /* wide card: lay out photo | body side-by-side */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: clamp(1.25rem, 3vw, 2rem);
+    border-bottom: var(--bd-hair);
+    padding-bottom: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  .journal__grid > .post:nth-child(3) .post__media {
+    /* restore border-radius on span-2 card */
+    border-radius: var(--radius);
+  }
+
+  .journal__grid > .post:nth-child(3) .post__body {
+    padding-top: 0;
+    align-self: center;
+  }
+
+  /* card 1 & 2 no longer need suppress — card 3 gets border explicitly above */
+  .journal__grid > .post:nth-child(3) {
+    border-bottom: none;
+  }
+
+  /* stagger stays the same on tablet */
+  .journal__grid > .post:nth-child(1) { --reveal-delay: 0ms; }
+  .journal__grid > .post:nth-child(2) { --reveal-delay: 80ms; }
+  .journal__grid > .post:nth-child(3) { --reveal-delay: 160ms; }
+}
+
+/* ---- Mobile: 1-column stacked ---- */
+@media (max-width: 560px) {
+  .journal__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-sm);
+  }
+
+  .journal__head .section__lead {
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
+
+  .journal__grid {
+    grid-template-columns: 1fr;
+    gap: 0;                    /* replaced by border-bottom on each post */
+  }
+
+  /* Reset all nth-child column spans to full width (1-col) */
+  .journal__grid > .post:nth-child(1) { grid-column: span 1; }
+  .journal__grid > .post:nth-child(2) { grid-column: span 1; }
+  .journal__grid > .post:nth-child(3) {
+    grid-column: span 1;
+    /* undo the 2-col split from tablet */
+    display: flex;
+    flex-direction: column;
+    border-bottom: none;        /* last card: no bottom rule on mobile */
+    padding-bottom: 0;
+  }
+
+  .journal__grid > .post:nth-child(3) .post__body {
+    padding-top: var(--sp-sm);
+  }
+
+  /* all posts: hairline top + spacious padding */
+  .journal__grid > .post:nth-child(1),
+  .journal__grid > .post:nth-child(2),
+  .journal__grid > .post:nth-child(3) {
+    border-top: var(--bd-hair);
+    border-bottom: none;
+    padding-top: clamp(1.25rem, 4vw, 1.75rem);
+    padding-bottom: clamp(1.25rem, 4vw, 1.75rem);
+  }
+
+  /* first card: no top rule (section already has clean top) */
+  .journal__grid > .post:nth-child(1) {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  /* no stagger delay on mobile (reduces perceived jank on small screens) */
+  .journal__grid > .post:nth-child(1) { --reveal-delay: 0ms; }
+  .journal__grid > .post:nth-child(2) { --reveal-delay: 0ms; }
+  .journal__grid > .post:nth-child(3) { --reveal-delay: 0ms; }
+
+  .post__excerpt { max-width: 100%; }
+}

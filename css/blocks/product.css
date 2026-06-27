@@ -1,0 +1,159 @@
+/* ============================================================
+   product.css — «Лукоморье» single product spread
+   BEM block: .product
+   Fine-art sticky-split: «паспорт изделия» pinned LEFT while the
+   angle gallery scrolls RIGHT. Cross-sell strip reuses .card/.catalog__grid
+   (see catalog.css) with a local --trio override so 3 cards share a row.
+
+   MOBILE REFLOW (≤960): the паспорт stacks ABOVE the gallery and
+   COLLAPSES — driven by [data-passport-toggle] + the [hidden] attr
+   (gallery.js). No !important hacks, no fragile attribute selectors.
+   ============================================================ */
+
+/* ---- breadcrumb ---- */
+.product__crumbs {
+  margin-bottom: var(--sp-lg);
+  color: var(--ink-soft);
+}
+.product__crumbs a { color: var(--clay-deep); }
+.product__crumbs a:hover { color: var(--ink); }
+
+/* ---- sticky-split layout ---- */
+.product__split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(1.5rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+/* ░░░ ПАСПОРТ — sticky left column ░░░ */
+.product__passport {
+  position: sticky;
+  top: calc(var(--header-h) + 1.5rem);
+}
+
+/* mobile collapse toggle — hidden on desktop, shown ≤960 */
+.passport__toggle {
+  display: none;
+  justify-content: space-between;
+  margin-bottom: var(--sp-sm);
+}
+
+/* the spec panel itself.
+   Ships [hidden] for mobile-first collapse; the desktop media query
+   below forces it open. A short opacity transition makes the mobile
+   expand feel intentional without wiring into the global reveal system. */
+.passport__panel {
+  opacity: 1;
+  transition: opacity var(--dur) var(--ease);
+}
+/* Desktop: the passport is always open. The panel ships [hidden] only so the
+   mobile-first collapse starts folded; here we override that and keep it shown. */
+@media (min-width: 961px) {
+  .passport__panel[hidden] { display: block; }
+}
+.passport__title {
+  max-width: none;
+  margin-bottom: var(--sp-sm);
+}
+.passport__note {
+  max-width: 46ch;
+  margin-bottom: var(--sp-md);
+}
+.passport__price {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--sp-md);
+}
+
+/* add-to-cart — slightly larger hit area than the catalog card button */
+.passport__add {
+  min-height: 48px;
+  padding: .85rem 1.6rem;
+  border-color: var(--ink);
+}
+
+/* ---- спецификация — hairline spec rows ---- */
+.passport__spec {
+  display: flex;
+  flex-direction: column;
+  gap: 0;                          /* gaps via padding + border-bottom */
+  margin: 0;
+  margin-top: var(--sp-xl);
+  padding: 0;
+  list-style: none;
+}
+.passport__spec li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3xs);
+  font-size: var(--fs-body);
+  line-height: var(--lh-snug);
+  color: var(--ink-soft);
+  padding-block: var(--sp-md);
+  border-bottom: var(--bd-hair);
+}
+.passport__spec li:first-child { padding-top: 0; }
+.passport__spec li:last-child  { border-bottom: none; padding-bottom: 0; }
+.passport__spec .u-label {
+  display: block;
+  margin-bottom: var(--sp-3xs);
+  color: var(--clay);
+}
+
+/* ░░░ ГАЛЕРЕЯ — right column, scrolls past the sticky passport ░░░ */
+.product__stage { margin-bottom: var(--sp-sm); }
+
+.product__thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-xs);
+}
+.product__thumb { border: 1px solid var(--line); }
+.product__thumb.is-active { border-color: var(--ink); }
+
+.product__detail { margin-top: var(--sp-lg); }
+
+/* photo caption under a gallery detail shot (Montserrat small-caps) */
+.product__cap {
+  margin-top: var(--sp-xs);
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--sage-deep);
+  padding-inline: 2px;
+}
+
+/* ============================================================
+   CROSS-SELL trio — three cards on one row.
+   Reuses .catalog__grid + .card; the --trio modifier drops the
+   6-column asymmetric nth-child spans so no card is orphaned.
+   ============================================================ */
+.catalog__grid--trio {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.catalog__grid--trio > .card:nth-child(1),
+.catalog__grid--trio > .card:nth-child(2),
+.catalog__grid--trio > .card:nth-child(3) {
+  grid-column: span 1;
+}
+
+@media (max-width: 700px) {
+  .catalog__grid--trio { grid-template-columns: 1fr; }
+  .catalog__grid--trio > .card:nth-child(1),
+  .catalog__grid--trio > .card:nth-child(2),
+  .catalog__grid--trio > .card:nth-child(3) {
+    grid-column: span 1;
+  }
+}
+
+/* ============================================================
+   MOBILE REFLOW ≤960 — passport stacks ABOVE the gallery,
+   becomes static, and collapses via the toggle.
+   ============================================================ */
+@media (max-width: 960px) {
+  .product__split { grid-template-columns: 1fr; }
+  .product__passport { position: static; }
+  .passport__toggle { display: inline-flex; }
+}

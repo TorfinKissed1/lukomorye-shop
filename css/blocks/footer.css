@@ -1,0 +1,169 @@
+/* ============================================================
+   footer.css — .footer block · «Лукоморье»
+   Dark-ink surface · warm boutique palette · soft 4px radius
+   Hairlines only (no heavy shadows) · fluid clamp() · AA contrast
+   ============================================================ */
+
+/* ---- Root surface ---- */
+.footer {
+  background: var(--ink);
+  color: var(--on-dark);
+  border-top: 1px solid var(--line);
+}
+
+/* ---- Main content row ---- */
+.footer__inner {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  column-gap: var(--col-gap);
+  row-gap: clamp(2rem, 4vw, 2.75rem);
+  align-items: start;
+  padding-block: clamp(3rem, 6vw, 5rem) clamp(2.25rem, 4vw, 3.5rem);
+}
+
+/* ---- Brand column ---- */
+.footer__brandcol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  max-width: 26ch;
+}
+
+.footer__brand {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(1.35rem, 1.1rem + 1.1vw, 1.9rem);
+  line-height: var(--lh-head);
+  letter-spacing: -.01em;
+  color: var(--on-dark);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+.footer__brand:hover { color: var(--clay); }
+
+.footer__tag {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  line-height: var(--lh-body);
+  color: rgba(246, 241, 234, .60);
+  max-width: 28ch;
+}
+
+/* ---- Nav columns ---- */
+.footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+}
+
+/* label heading inside nav */
+.footer__nav > .u-label {
+  color: rgba(246, 241, 234, .46);
+  margin-bottom: var(--sp-3xs);
+  display: block;
+}
+
+.footer__nav a {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  color: rgba(246, 241, 234, .82);
+  text-decoration: none;
+  text-underline-offset: .18em;
+  transition: color var(--dur-fast) var(--ease);
+  white-space: nowrap;
+}
+.footer__nav a:hover { color: var(--clay); }
+
+/* ---- Contact column ---- */
+.footer__contactcol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+}
+
+.footer__contactcol > .u-label {
+  color: rgba(246, 241, 234, .46);
+  margin-bottom: var(--sp-3xs);
+  display: block;
+}
+
+.footer__contactcol a {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  color: rgba(246, 241, 234, .82);
+  text-decoration: none;
+  text-underline-offset: .18em;
+  transition: color var(--dur-fast) var(--ease);
+  white-space: nowrap;
+}
+.footer__contactcol a:hover { color: var(--clay); }
+
+/* ---- Hairline divider + base bar ---- */
+.footer__base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-md);
+  padding-block: var(--sp-md);
+  border-top: 1px solid var(--line-on-dark);
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  line-height: 1.4;
+  color: rgba(246, 241, 234, .40);
+  letter-spacing: .02em;
+}
+
+/* ============================================================
+   TABLET — 2-column grid: brand wide, then columns + contact
+   (≤ 900px)
+   ============================================================ */
+@media (max-width: 900px) {
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+    row-gap: clamp(2rem, 5vw, 3rem);
+  }
+
+  /* brand spans full width on its own row */
+  .footer__inner > .footer__brandcol {
+    grid-column: 1 / -1;
+    max-width: 38ch;
+  }
+
+  /* nav + contact drop into a 2-col lower row — same nth-child selectors */
+  .footer__inner > .footer__nav:nth-child(2) { grid-column: 1; }
+  .footer__inner > .footer__nav:nth-child(3) { grid-column: 2; }
+  .footer__inner > .footer__contactcol:nth-child(4) { grid-column: 1; }
+}
+
+/* ============================================================
+   MOBILE 390px — single column, generous spacing
+   (≤ 600px)
+   ============================================================ */
+@media (max-width: 600px) {
+  .footer__inner {
+    grid-template-columns: 1fr;
+    row-gap: clamp(1.5rem, 4vw, 2rem);
+    padding-block: clamp(2.25rem, 6vw, 3rem) clamp(1.5rem, 4vw, 2.25rem);
+  }
+
+  /* reuse same nth-child selectors — specificity parity with tablet overrides */
+  .footer__inner > .footer__brandcol    { grid-column: 1; max-width: 100%; }
+  .footer__inner > .footer__nav:nth-child(2) { grid-column: 1; }
+  .footer__inner > .footer__nav:nth-child(3) { grid-column: 1; }
+  .footer__inner > .footer__contactcol:nth-child(4) { grid-column: 1; }
+
+  .footer__base {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-2xs);
+    padding-block: var(--sp-sm);
+  }
+}
+
+/* ---- Focus visible on dark surface ---- */
+.footer a:focus-visible,
+.footer button:focus-visible {
+  outline: 2.5px solid var(--clay);
+  outline-offset: 3px;
+}

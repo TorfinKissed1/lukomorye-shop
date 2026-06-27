@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Речная глина — кружка ручной работы · Лукоморье</title>
+  <meta name="description" content="Кружка «Речная глина» — серая глина с Карельского перешейка, ручная лепка, малая партия. Состав, объём, имя мастера и номер партии — на упаковке." />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c98a6d'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23f6f1ea' text-anchor='middle'%3E%D0%9B%3C/text%3E%3C/svg%3E" />
+
+  <!-- Google Fonts: Lora (head) + Mulish (body) + Montserrat (label), cyrillic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@600&family=Mulish:wght@400;600;700&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/settings.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/blocks/header.css" />
+  <link rel="stylesheet" href="css/blocks/catalog.css" />
+  <link rel="stylesheet" href="css/blocks/journal.css" />
+  <link rel="stylesheet" href="css/blocks/newsletter.css" />
+  <link rel="stylesheet" href="css/blocks/product.css" />
+  <link rel="stylesheet" href="css/blocks/footer.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+
+  <!-- ============================================================
+       SHARED HEADER — identical on index/product/cart.
+       Cart icon carries .cart__count (live counter via cart.js).
+       ============================================================ -->
+  <header class="header" data-header>
+    <div class="container header__inner">
+      <a class="header__brand" href="index.html">Лукоморье</a>
+
+      <nav class="header__nav" aria-label="Каталог">
+        <a href="index.html#catalog" data-filter="Косметика">Косметика</a>
+        <a href="index.html#catalog" data-filter="Керамика">Керамика</a>
+        <a href="index.html#catalog" data-filter="Наборы">Наборы</a>
+        <a href="index.html#journal">Журнал</a>
+      </nav>
+
+      <div class="header__actions">
+        <a class="header__cart" href="cart.html" aria-label="Корзина">
+          <svg class="icon" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
+            <path d="M3 4h2l2.4 12.2a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.2L21 8H6"/>
+            <circle cx="9.5" cy="20.5" r="1.2"/>
+            <circle cx="17.5" cy="20.5" r="1.2"/>
+          </svg>
+          <span class="cart__count" data-cart-count aria-live="polite">0</span>
+        </a>
+        <button class="header__burger" type="button" aria-label="Меню" aria-expanded="false" data-burger>
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile drawer -->
+    <div class="header__drawer" data-drawer hidden>
+      <nav aria-label="Меню">
+        <a href="index.html#catalog" data-filter="Косметика">Косметика</a>
+        <a href="index.html#catalog" data-filter="Керамика">Керамика</a>
+        <a href="index.html#catalog" data-filter="Наборы">Наборы</a>
+        <a href="index.html#journal">Журнал</a>
+        <a href="cart.html">Корзина</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================================ PRODUCT
+         Fine-art spread: «паспорт изделия» pinned LEFT (sticky) while a
+         gallery of angle photos scrolls RIGHT (product.css .product__split).
+         MOBILE REFLOW (≤960): the паспорт becomes a COLLAPSIBLE block
+         placed ABOVE the gallery — driven by [data-passport-toggle].
+         Content is hydrated per ?id= by the products map at the foot of
+         this page; the markup below ships «Речная глина» as the default.
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+
+        <!-- breadcrumb -->
+        <p class="u-label product__crumbs" data-reveal>
+          <a href="index.html">Лукоморье</a>
+          &nbsp;·&nbsp;
+          <a href="index.html#catalog" data-crumb-type>Керамика</a>
+          &nbsp;·&nbsp; <span data-crumb-name>Речная глина</span>
+        </p>
+
+        <!-- sticky-split: passport | gallery -->
+        <div class="product__split">
+
+          <!-- ░░░ ПАСПОРТ ИЗДЕЛИЯ — sticky left ░░░ -->
+          <div class="product__passport">
+
+            <!-- mobile collapse toggle — shown ≤960 via product.css; gallery.js toggles it -->
+            <button class="btn btn--ghost btn--block passport__toggle" type="button"
+                    data-passport-toggle aria-expanded="false" aria-controls="passport-panel">
+              Паспорт изделия
+              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+
+            <!-- No data-reveal here: the panel ships [hidden] for mobile-first
+                 collapse, so a reveal observer could leave it opacity:0 after a
+                 rotate-to-desktop. Its entrance is animated by .passport__panel's
+                 own opacity transition (product.css) when [hidden] is removed. -->
+            <div id="passport-panel" class="passport__panel" data-passport-panel hidden>
+              <span class="section__eyebrow" data-passport-eyebrow>Керамика · Ручная работа</span>
+              <h1 class="section__title passport__title" data-passport-name>
+                Речная глина
+              </h1>
+              <p class="card__note passport__note" data-passport-note>
+                Кружка из серой глины с потёками глазури. Каждое утро выглядит чуть
+                иначе в зависимости от света — и в этом весь смысл.
+              </p>
+
+              <!-- gold price -->
+              <p class="card__price passport__price" data-passport-price>3 200 ₽</p>
+
+              <!-- add-to-cart: SVG stroke check + counter bump -->
+              <button class="card__add passport__add" type="button"
+                      data-add-to-cart
+                      data-id="rechnaya-glina"
+                      data-name="Речная глина"
+                      data-price="3200"
+                      data-img="img/prod-4.jpg"
+                      aria-label="Добавить «Речная глина» в корзину">
+                <svg class="card__check icon" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+                  <path class="card__check-path" d="M5 12.5l4.5 4.5L19 7"/>
+                </svg>
+                <span class="card__add-label" data-add-label>В корзину</span>
+              </button>
+
+              <!-- спецификация — hairline spec rows -->
+              <ul class="passport__spec" data-passport-spec>
+                <li>
+                  <span class="u-label">Состав</span>
+                  Серая глина (карьер под Выборгом), пищевая глазурь без свинца
+                </li>
+                <li>
+                  <span class="u-label">Объём</span>
+                  280 мл · высота 95 мм
+                </li>
+                <li>
+                  <span class="u-label">Мастер</span>
+                  Илья · гончарный круг, обжиг 1240 °C
+                </li>
+                <li>
+                  <span class="u-label">Партия №</span>
+                  К-24 · 14 единиц · март 2026
+                </li>
+                <li>
+                  <span class="u-label">Уход</span>
+                  Можно в посудомоечной машине · не для открытого огня
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- ░░░ ГАЛЕРЕЯ — scrolls right ░░░ -->
+          <div>
+            <!-- main stage -->
+            <figure class="product__stage" data-gallery-stage data-reveal>
+              <span class="u-img u-img--square">
+                <img src="img/prod-4.jpg" width="1000" height="1000" loading="eager"
+                     alt="Кружка «Речная глина» — общий вид" />
+              </span>
+            </figure>
+
+            <!-- thumbnails (angle photos) — click swaps the stage -->
+            <div class="product__thumbs" data-reveal>
+              <button class="u-img u-img--square product__thumb is-active" type="button"
+                      data-thumb data-full="img/prod-4.jpg" data-alt="Кружка «Речная глина» — общий вид"
+                      aria-current="true" aria-label="Ракурс — общий вид">
+                <img src="img/prod-4.jpg" width="240" height="240" loading="lazy" alt="" />
+              </button>
+              <button class="u-img u-img--square product__thumb" type="button"
+                      data-thumb data-full="img/prod-6.jpg" data-alt="Речная глина — лепка на круге"
+                      aria-current="false" aria-label="Ракурс — лепка на круге">
+                <img src="img/prod-6.jpg" width="240" height="240" loading="lazy" alt="" />
+              </button>
+              <button class="u-img u-img--square product__thumb" type="button"
+                      data-thumb data-full="img/prod-5.jpg" data-alt="Речная глина — на полке мастерской"
+                      aria-current="false" aria-label="Ракурс — на полке">
+                <img src="img/prod-5.jpg" width="240" height="240" loading="lazy" alt="" />
+              </button>
+              <button class="u-img u-img--square product__thumb" type="button"
+                      data-thumb data-full="img/prod-1.jpg" data-alt="Речная глина — деталь глазури"
+                      aria-current="false" aria-label="Ракурс — деталь глазури">
+                <img src="img/prod-1.jpg" width="240" height="240" loading="lazy" alt="" />
+              </button>
+            </div>
+
+            <!-- a tall detail shot continues the scroll past the sticky passport -->
+            <figure class="product__detail" data-reveal>
+              <span class="u-img u-img--wide">
+                <img src="img/prod-1b.jpg" width="1200" height="750" loading="lazy"
+                     alt="Руки мастера у глины — деталь поверхности" />
+              </span>
+              <figcaption class="product__cap">Поверхность хранит след пальцев — каждая кружка единственная</figcaption>
+            </figure>
+
+            <figure class="product__detail" data-reveal>
+              <span class="u-img u-img--portrait">
+                <img src="img/prod-5.jpg" width="900" height="1125" loading="lazy"
+                     alt="Кружка «Речная глина» на деревянной полке" />
+              </span>
+            </figure>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ CROSS-SELL
+         «Из этой партии» — reuses the catalog card + grid VERBATIM. -->
+    <section class="section s-tint">
+      <div class="container">
+        <header class="catalog__head">
+          <div>
+            <span class="section__eyebrow" data-reveal>Из этой партии</span>
+            <h2 class="section__title" data-reveal-head>Сделано в те же дни</h2>
+          </div>
+        </header>
+
+        <div class="catalog__grid catalog__grid--trio">
+
+          <!-- Туман -->
+          <article class="card" data-reveal data-type="Керамика">
+            <a class="card__media u-img u-img--square" href="product.html?id=tuman" aria-label="Туман">
+              <img class="card__img card__img--front" src="img/prod-5.jpg" width="800" height="800" loading="lazy" alt="Набор пиал «Туман»" />
+              <img class="card__img card__img--back" src="img/prod-4.jpg" width="800" height="800" loading="lazy" alt="Туман — другой ракурс" />
+            </a>
+            <div class="card__body">
+              <span class="card__type u-label">Керамика</span>
+              <h3 class="card__name"><a href="product.html?id=tuman">Туман</a></h3>
+              <p class="card__note">Набор из двух пиал ручной лепки — в неровностях стенок живёт настоящее время мастера.</p>
+              <div class="card__foot">
+                <span class="card__price">4 600 ₽</span>
+                <button class="card__add" type="button"
+                        data-add-to-cart
+                        data-id="tuman"
+                        data-name="Туман"
+                        data-price="4600"
+                        data-img="img/prod-5.jpg"
+                        aria-label="Добавить «Туман» в корзину">
+                  <svg class="card__check icon" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+                    <path class="card__check-path" d="M5 12.5l4.5 4.5L19 7"/>
+                  </svg>
+                  <span class="card__add-label" data-add-label>В корзину</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Речная глина (родная) -->
+          <article class="card" data-reveal data-type="Керамика">
+            <a class="card__media u-img u-img--square" href="product.html?id=rechnaya-glina" aria-label="Речная глина">
+              <img class="card__img card__img--front" src="img/prod-4.jpg" width="800" height="800" loading="lazy" alt="Кружка «Речная глина»" />
+              <img class="card__img card__img--back" src="img/prod-6.jpg" width="800" height="800" loading="lazy" alt="Речная глина — другой ракурс" />
+            </a>
+            <div class="card__body">
+              <span class="card__type u-label">Керамика</span>
+              <h3 class="card__name"><a href="product.html?id=rechnaya-glina">Речная глина</a></h3>
+              <p class="card__note">Кружка из серой глины с потёками глазури — каждое утро выглядит чуть иначе в зависимости от света.</p>
+              <div class="card__foot">
+                <span class="card__price">3 200 ₽</span>
+                <button class="card__add" type="button"
+                        data-add-to-cart
+                        data-id="rechnaya-glina"
+                        data-name="Речная глина"
+                        data-price="3200"
+                        data-img="img/prod-4.jpg"
+                        aria-label="Добавить «Речная глина» в корзину">
+                  <svg class="card__check icon" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+                    <path class="card__check-path" d="M5 12.5l4.5 4.5L19 7"/>
+                  </svg>
+                  <span class="card__add-label" data-add-label>В корзину</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Лесной полдень -->
+          <article class="card" data-reveal data-type="Наборы">
+            <a class="card__media u-img u-img--square" href="product.html?id=lesnoy-polden" aria-label="Лесной полдень">
+              <img class="card__img card__img--front" src="img/prod-6.jpg" width="800" height="800" loading="lazy" alt="Подарочный набор «Лесной полдень»" />
+              <img class="card__img card__img--back" src="img/gift.jpg" width="800" height="800" loading="lazy" alt="Лесной полдень — упаковка" />
+            </a>
+            <div class="card__body">
+              <span class="card__type u-label">Наборы</span>
+              <h3 class="card__name"><a href="product.html?id=lesnoy-polden">Лесной полдень</a></h3>
+              <p class="card__note">Подарочный набор: крем, бальзам и пиала — сложенные вместе, они рассказывают одну историю.</p>
+              <div class="card__foot">
+                <span class="card__price">5 490 ₽</span>
+                <button class="card__add" type="button"
+                        data-add-to-cart
+                        data-id="lesnoy-polden"
+                        data-name="Лесной полдень"
+                        data-price="5490"
+                        data-img="img/prod-6.jpg"
+                        aria-label="Добавить «Лесной полдень» в корзину">
+                  <svg class="card__check icon" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+                    <path class="card__check-path" d="M5 12.5l4.5 4.5L19 7"/>
+                  </svg>
+                  <span class="card__add-label" data-add-label>В корзину</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ REVIEWS
+         Отзывы со спецификой — reuses .journal grid + .post cards. -->
+    <section class="section">
+      <div class="container">
+        <header class="journal__head">
+          <div>
+            <span class="section__eyebrow" data-reveal>Отзывы</span>
+            <h2 class="section__title" data-reveal-head>Что говорят о кружке</h2>
+          </div>
+          <p class="section__lead" data-reveal>Покупатели пишут нам про конкретные мелочи — мы их не правим.</p>
+        </header>
+
+        <div class="journal__grid">
+          <article class="post" data-reveal>
+            <div class="post__body" style="padding-top:0">
+              <span class="u-label">Марина · Санкт-Петербург</span>
+              <p class="post__excerpt" style="font-size:var(--fs-body);color:var(--ink)">
+                «Глазурь правда другая с каждой стороны. Ручка села в ладонь как влитая —
+                видно, что лепили под руку, а не под форму. Партия К-24, кофе по утрам.»
+              </p>
+              <span class="post__more u-label">Покупка подтверждена</span>
+            </div>
+          </article>
+
+          <article class="post" data-reveal style="--reveal-delay:80ms">
+            <div class="post__body" style="padding-top:0">
+              <span class="u-label">Алексей · Москва</span>
+              <p class="post__excerpt" style="font-size:var(--fs-body);color:var(--ink)">
+                «280 мл — это честные 280, не маркетинговые. Тяжёлая, тёплая, край тонкий.
+                Микротрещинки на глазури сначала испугали, потом прочитал в журнале — это норма.»
+              </p>
+              <span class="post__more u-label">Покупка подтверждена</span>
+            </div>
+          </article>
+
+          <article class="post" data-reveal style="--reveal-delay:160ms">
+            <div class="post__body" style="padding-top:0">
+              <span class="u-label">Дарья · Казань</span>
+              <p class="post__excerpt" style="font-size:var(--fs-body);color:var(--ink)">
+                «Дошла в крафте и льне, ни царапины. На дне — имя Ильи и номер партии от руки.
+                Брала в подарок, оставила себе. Закажу вторую из следующей печи.»
+              </p>
+              <span class="post__more u-label">Покупка подтверждена</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ NEWSLETTER -->
+    <section class="section s-tint">
+      <div class="container newsletter">
+        <div class="newsletter__copy">
+          <span class="section__eyebrow" data-reveal>Письма из Лукоморья</span>
+          <h2 class="newsletter__title" data-reveal-head>Узнавать о новых партиях первыми</h2>
+          <p class="newsletter__lead" data-reveal>Раз в месяц — что вышло из печи и что сварили на этой неделе. Без спама, отписаться можно в одно касание.</p>
+        </div>
+
+        <form class="newsletter__form" data-newsletter novalidate data-reveal>
+          <div class="newsletter__row">
+            <label class="visually-hidden" for="nl-email">Электронная почта</label>
+            <input class="newsletter__input" id="nl-email" name="email" type="email"
+                   inputmode="email" autocomplete="email" placeholder="Ваша почта"
+                   required data-field="email" />
+            <button class="btn btn--clay" type="submit">Подписаться</button>
+          </div>
+          <p class="form__error" data-error-for="email" hidden>Проверьте адрес почты</p>
+
+          <p class="newsletter__success" data-newsletter-success hidden>
+            <svg class="icon" width="22" height="22" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+              <path class="nl-check-path" d="M5 12.5l4.5 4.5L19 7"/>
+            </svg>
+            Спасибо — мы написали вам письмо для подтверждения.
+          </p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       SHARED FOOTER — identical on index/product/cart.
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brandcol">
+        <a class="footer__brand" href="index.html">Лукоморье</a>
+        <p class="footer__tag">Там, где лес встречает море — каждая вещь хранит тепло рук.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Каталог">
+        <span class="u-label">Каталог</span>
+        <a href="index.html#catalog">Косметика</a>
+        <a href="index.html#catalog">Керамика</a>
+        <a href="index.html#catalog">Наборы</a>
+        <a href="index.html#journal">Журнал</a>
+      </nav>
+
+      <nav class="footer__nav" aria-label="Магазин">
+        <span class="u-label">Магазин</span>
+        <a href="cart.html">Корзина</a>
+        <a href="index.html#contacts">Доставка</a>
+        <a href="index.html#contacts">Контакты</a>
+      </nav>
+
+      <div class="footer__contactcol">
+        <span class="u-label">Связь</span>
+        <a href="tel:+78120000000">+7 812 000-00-00</a>
+        <a href="mailto:hello@lukomorye.ru">hello@lukomorye.ru</a>
+      </div>
+    </div>
+    <div class="container footer__base">
+      <span>© 2026 Лукоморье. Ручная работа, малые партии.</span>
+      <span>Санкт-Петербург · Карельский перешеек</span>
+    </div>
+  </footer>
+
+  <svg class="grain" aria-hidden="true">
+    <filter id="grain-noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter>
+    <rect width="100%" height="100%" filter="url(#grain-noise)"/>
+  </svg>
+
+  <!-- ============================================================
+       PRODUCT HYDRATION — one паспорт template, six products.
+       PLAN.md defines all six ids; we read ?id= and rewrite the
+       passport, gallery and <title> in place. Unknown ids fall back
+       to the catalog so a bad link never shows the wrong product.
+       Runs before main.js so cart.js binds the corrected data-* set.
+       ============================================================ -->
+  <script>
+    (function () {
+      var PRODUCTS = {
+        'kedrovaya-smola': {
+          type: 'Косметика', eyebrow: 'Косметика · Ручная работа',
+          name: 'Кедровая смола', price: 1490, img: 'img/prod-1.jpg',
+          note: 'Бальзам для губ на основе сибирской смолы и масла облепихи — живёт на коже, а не поверх неё.',
+          gallery: [
+            ['img/prod-1.jpg',  'Бальзам «Кедровая смола» — общий вид'],
+            ['img/prod-1b.jpg', 'Кедровая смола — другой ракурс'],
+            ['img/journal-1.jpg', 'Кедровая смола — ягоды облепихи'],
+            ['img/prod-3.jpg',  'Кедровая смола — текстура бальзама']
+          ],
+          spec: [
+            ['Состав', 'Кедровая живица, масло облепихи, пчелиный воск, витамин E'],
+            ['Объём', '15 мл · стеклянная баночка'],
+            ['Мастер', 'Ольга · варка малыми партиями, без отдушек'],
+            ['Партия №', 'К-12 · 40 единиц · февраль 2026'],
+            ['Уход', 'Хранить вдали от тепла · срок 12 месяцев']
+          ]
+        },
+        'belaya-noch': {
+          type: 'Косметика', eyebrow: 'Косметика · Ручная работа',
+          name: 'Белая ночь', price: 2190, img: 'img/prod-2.jpg',
+          note: 'Ночной крем с экстрактом ромашки и молочными протеинами — успокаивает даже после долгого дня.',
+          gallery: [
+            ['img/prod-2.jpg',  'Ночной крем «Белая ночь» — общий вид'],
+            ['img/prod-2b.jpg', 'Белая ночь — другой ракурс'],
+            ['img/journal-2.jpg', 'Белая ночь — ромашковый настой'],
+            ['img/prod-1.jpg',  'Белая ночь — текстура крема']
+          ],
+          spec: [
+            ['Состав', 'Экстракт ромашки, молочные протеины, масло ши, гиалуроновая кислота'],
+            ['Объём', '50 мл · стеклянная банка с дозатором'],
+            ['Мастер', 'Ольга · холодный процесс, без парабенов'],
+            ['Партия №', 'К-09 · 28 единиц · февраль 2026'],
+            ['Уход', 'После вскрытия — 6 месяцев · хранить в прохладе']
+          ]
+        },
+        'moroshka': {
+          type: 'Косметика', eyebrow: 'Косметика · Ручная работа',
+          name: 'Морошка', price: 1890, img: 'img/prod-3.jpg',
+          note: 'Скраб для тела с ягодами морошки и морской солью — оставляет кожу как после летней реки.',
+          gallery: [
+            ['img/prod-3.jpg',  'Скраб «Морошка» — общий вид'],
+            ['img/journal-1.jpg', 'Морошка — ягоды'],
+            ['img/prod-1b.jpg', 'Морошка — текстура скраба'],
+            ['img/prod-2.jpg',  'Морошка — на полке мастерской']
+          ],
+          spec: [
+            ['Состав', 'Морская соль, масло ягод морошки, кокосовое масло, сахар'],
+            ['Объём', '250 мл · стеклянная банка'],
+            ['Мастер', 'Ольга · ручное смешивание, без консервантов'],
+            ['Партия №', 'К-15 · 32 единицы · март 2026'],
+            ['Уход', 'Беречь от воды в банке · срок 9 месяцев']
+          ]
+        },
+        'rechnaya-glina': {
+          type: 'Керамика', eyebrow: 'Керамика · Ручная работа',
+          name: 'Речная глина', price: 3200, img: 'img/prod-4.jpg',
+          note: 'Кружка из серой глины с потёками глазури. Каждое утро выглядит чуть иначе в зависимости от света — и в этом весь смысл.',
+          gallery: [
+            ['img/prod-4.jpg', 'Кружка «Речная глина» — общий вид'],
+            ['img/prod-6.jpg', 'Речная глина — лепка на круге'],
+            ['img/prod-5.jpg', 'Речная глина — на полке мастерской'],
+            ['img/prod-1.jpg', 'Речная глина — деталь глазури']
+          ],
+          spec: [
+            ['Состав', 'Серая глина (карьер под Выборгом), пищевая глазурь без свинца'],
+            ['Объём', '280 мл · высота 95 мм'],
+            ['Мастер', 'Илья · гончарный круг, обжиг 1240 °C'],
+            ['Партия №', 'К-24 · 14 единиц · март 2026'],
+            ['Уход', 'Можно в посудомоечной машине · не для открытого огня']
+          ]
+        },
+        'tuman': {
+          type: 'Керамика', eyebrow: 'Керамика · Ручная работа',
+          name: 'Туман', price: 4600, img: 'img/prod-5.jpg',
+          note: 'Набор из двух пиал ручной лепки — в неровностях стенок живёт настоящее время мастера.',
+          gallery: [
+            ['img/prod-5.jpg', 'Набор пиал «Туман» — общий вид'],
+            ['img/prod-4.jpg', 'Туман — другой ракурс'],
+            ['img/prod-6.jpg', 'Туман — лепка на круге'],
+            ['img/prod-1b.jpg', 'Туман — деталь матовой глазури']
+          ],
+          spec: [
+            ['Состав', 'Светлая глина, матовая пищевая глазурь без свинца'],
+            ['Объём', '2 пиалы · 220 мл каждая'],
+            ['Мастер', 'Илья · ручная лепка, обжиг 1240 °C'],
+            ['Партия №', 'К-22 · 9 наборов · март 2026'],
+            ['Уход', 'Можно в посудомоечной машине · не для открытого огня']
+          ]
+        },
+        'lesnoy-polden': {
+          type: 'Наборы', eyebrow: 'Наборы · Ручная работа',
+          name: 'Лесной полдень', price: 5490, img: 'img/prod-6.jpg',
+          note: 'Подарочный набор: крем, бальзам и пиала — сложенные вместе, они рассказывают одну историю.',
+          gallery: [
+            ['img/prod-6.jpg', 'Набор «Лесной полдень» — общий вид'],
+            ['img/gift.jpg',   'Лесной полдень — упаковка'],
+            ['img/prod-2.jpg', 'Лесной полдень — ночной крем'],
+            ['img/prod-1.jpg', 'Лесной полдень — бальзам для губ']
+          ],
+          spec: [
+            ['Состав', 'Ночной крем «Белая ночь», бальзам «Кедровая смола», пиала ручной лепки'],
+            ['Объём', '3 предмета · в крафтовой коробке со льном'],
+            ['Мастер', 'Ольга и Илья · собрано вручную'],
+            ['Партия №', 'К-26 · 12 наборов · март 2026'],
+            ['Уход', 'Косметику — в прохладе · керамику — без открытого огня']
+          ]
+        }
+      };
+
+      var fmtPrice = function (n) {
+        return new Intl.NumberFormat('ru-RU').format(n) + ' ₽';
+      };
+
+      var id = new URLSearchParams(location.search).get('id');
+      var p = id && PRODUCTS[id];
+
+      // Unknown / missing id → back to the catalog (never show the wrong product).
+      if (!p) {
+        if (id) { location.replace('index.html#catalog'); return; }
+        return; // no id at all: keep the default markup as a graceful landing
+      }
+
+      var $ = function (sel) { return document.querySelector(sel); };
+      var setText = function (sel, text) { var el = $(sel); if (el) el.textContent = text; };
+
+      // <head> + breadcrumb
+      document.title = p.name + ' — ' + (p.type === 'Керамика' ? 'керамика ручной работы' :
+                       p.type === 'Наборы' ? 'подарочный набор' : 'натуральная косметика') + ' · Лукоморье';
+      setText('[data-crumb-type]', p.type);
+      setText('[data-crumb-name]', p.name);
+      var crumbType = $('[data-crumb-type]');
+      if (crumbType) crumbType.setAttribute('href', 'index.html#catalog');
+
+      // passport copy
+      setText('[data-passport-eyebrow]', p.eyebrow);
+      setText('[data-passport-name]', p.name);
+      setText('[data-passport-note]', p.note);
+      setText('[data-passport-price]', fmtPrice(p.price));
+
+      // add-to-cart data-* (cart.js reads these on init, which runs after this script)
+      var addBtn = $('[data-add-to-cart]');
+      if (addBtn) {
+        addBtn.dataset.id = id;
+        addBtn.dataset.name = p.name;
+        addBtn.dataset.price = String(p.price);
+        addBtn.dataset.img = p.img;
+        addBtn.setAttribute('aria-label', 'Добавить «' + p.name + '» в корзину');
+      }
+
+      // спецификация rows
+      var specEl = $('[data-passport-spec]');
+      if (specEl) {
+        specEl.innerHTML = p.spec.map(function (row) {
+          var label = document.createElement('span');
+          label.className = 'u-label';
+          label.textContent = row[0];
+          var li = document.createElement('li');
+          li.appendChild(label);
+          li.appendChild(document.createTextNode(row[1]));
+          return li.outerHTML;
+        }).join('');
+      }
+
+      // gallery stage + thumbnails
+      var stageImg = $('[data-gallery-stage] img');
+      if (stageImg && p.gallery[0]) {
+        stageImg.src = p.gallery[0][0];
+        stageImg.alt = p.gallery[0][1];
+      }
+      var thumbs = document.querySelectorAll('[data-thumb]');
+      thumbs.forEach(function (btn, i) {
+        var g = p.gallery[i];
+        if (!g) { btn.hidden = true; return; }
+        btn.dataset.full = g[0];
+        btn.dataset.alt = g[1];
+        btn.setAttribute('aria-label', 'Ракурс — ' + g[1]);
+        var img = btn.querySelector('img');
+        if (img) img.src = g[0];
+      });
+    })();
+  </script>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

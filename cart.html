@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Корзина — Лукоморье</title>
+  <meta name="description" content="Корзина «Лукоморье» — натуральная косметика и керамика ручной работы. Малые партии, честный состав, тепло рук мастера." />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c98a6d'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23f6f1ea' text-anchor='middle'%3E%D0%9B%3C/text%3E%3C/svg%3E" />
+
+  <!-- Google Fonts: Lora (head) + Mulish (body) + Montserrat (label), cyrillic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@600&family=Mulish:wght@400;600;700&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/settings.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/blocks/header.css" />
+  <link rel="stylesheet" href="css/blocks/hero.css" />
+  <link rel="stylesheet" href="css/blocks/catalog.css" />
+  <link rel="stylesheet" href="css/blocks/story.css" />
+  <link rel="stylesheet" href="css/blocks/journal.css" />
+  <link rel="stylesheet" href="css/blocks/newsletter.css" />
+  <link rel="stylesheet" href="css/blocks/contacts.css" />
+  <link rel="stylesheet" href="css/blocks/cart.css" />
+  <link rel="stylesheet" href="css/blocks/footer.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+
+  <!-- ============================================================
+       SHARED HEADER — identical on index/product/cart.
+       Cart icon carries .cart__count (live counter via cart.js).
+       ============================================================ -->
+  <header class="header" data-header>
+    <div class="container header__inner">
+      <a class="header__brand" href="index.html">Лукоморье</a>
+
+      <nav class="header__nav" aria-label="Каталог">
+        <a href="index.html#catalog" data-filter="Косметика">Косметика</a>
+        <a href="index.html#catalog" data-filter="Керамика">Керамика</a>
+        <a href="index.html#catalog" data-filter="Наборы">Наборы</a>
+        <a href="index.html#journal">Журнал</a>
+      </nav>
+
+      <div class="header__actions">
+        <a class="header__cart" href="cart.html" aria-label="Корзина">
+          <svg class="icon" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
+            <path d="M3 4h2l2.4 12.2a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.2L21 8H6"/>
+            <circle cx="9.5" cy="20.5" r="1.2"/>
+            <circle cx="17.5" cy="20.5" r="1.2"/>
+          </svg>
+          <span class="cart__count" data-cart-count aria-live="polite">0</span>
+        </a>
+        <button class="header__burger" type="button" aria-label="Меню" aria-expanded="false" data-burger>
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile drawer -->
+    <div class="header__drawer" data-drawer hidden>
+      <nav aria-label="Меню">
+        <a href="index.html#catalog" data-filter="Косметика">Косметика</a>
+        <a href="index.html#catalog" data-filter="Керамика">Керамика</a>
+        <a href="index.html#catalog" data-filter="Наборы">Наборы</a>
+        <a href="index.html#journal">Журнал</a>
+        <a href="cart.html">Корзина</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================================ CART -->
+    <section class="cart-page">
+      <div class="container">
+
+        <header class="cart-page__head">
+          <span class="cart-page__eyebrow section__eyebrow" data-reveal>Корзина</span>
+          <h1 class="cart-page__title" data-reveal-head>Собранное вашими руками</h1>
+        </header>
+
+        <div class="cart-page__inner">
+
+          <!-- ===== LEFT: line items + empty state ===== -->
+          <div data-reveal>
+
+            <!-- cart.js fills this with .cart__item rows -->
+            <div class="cart__items" data-cart-root></div>
+
+            <!-- empty state — cart.js toggles .is-visible when cart is empty -->
+            <div class="cart__empty">
+              <h2 class="cart__empty-title">В корзине пока пусто</h2>
+              <p class="cart__empty-lead">
+                Загляните в каталог — мы делаем малыми партиями, и каждая вещь
+                хранит тепло рук: имя мастера и номер на каждой упаковке.
+              </p>
+              <a class="btn btn--primary" href="index.html#catalog">В каталог</a>
+            </div>
+
+          </div>
+
+          <!-- ===== RIGHT: sticky summary + checkout =====
+               No data-reveal here: cart.js owns this element's visibility via
+               the [hidden] attribute (empty cart hides it, items show it). A
+               reveal observer would never fire while hidden, leaving it
+               opacity:0 forever when items arrive later (cross-tab sync). -->
+          <aside class="cart__summary">
+            <h2 class="cart__summary-title">Итог</h2>
+
+            <div class="cart__summary-row">
+              <span class="cart__summary-label">Товары</span>
+              <span class="cart__summary-val" data-cart-total>0 ₽</span>
+            </div>
+            <div class="cart__summary-row">
+              <span class="cart__summary-label">Доставка</span>
+              <span class="cart__summary-val">при подтверждении</span>
+            </div>
+            <div class="cart__summary-row cart__summary-row--total">
+              <span class="cart__summary-label">Итого</span>
+              <span class="cart__summary-val" data-cart-total>0 ₽</span>
+            </div>
+
+            <p class="cart__delivery-note">
+              СДЭК и Почтой России. Оплата после подтверждения наличия — без
+              предоплаты за товар, которого нет в этой партии.
+            </p>
+
+            <!-- checkout form -->
+            <form class="cart__form" data-checkout novalidate>
+
+              <div class="cart__field">
+                <label class="cart__label" for="co-name">Имя</label>
+                <input class="cart__input" id="co-name" name="name" type="text"
+                       autocomplete="name" placeholder="Имя и фамилия" required
+                       data-field="name" />
+              </div>
+
+              <div class="cart__field">
+                <label class="cart__label" for="co-email">Почта</label>
+                <input class="cart__input" id="co-email" name="email" type="email"
+                       inputmode="email" autocomplete="email" placeholder="Почта для письма"
+                       required data-field="email" />
+                <p class="cart__field-error" data-error-for="email" hidden>Проверьте адрес почты</p>
+              </div>
+
+              <div class="cart__field">
+                <label class="cart__label" for="co-phone">Телефон</label>
+                <input class="cart__input" id="co-phone" name="phone" type="tel"
+                       inputmode="tel" autocomplete="tel" placeholder="Телефон"
+                       data-field="phone" />
+              </div>
+
+              <div class="cart__field">
+                <label class="cart__label" for="co-city">Город</label>
+                <input class="cart__input" id="co-city" name="city" type="text"
+                       autocomplete="address-level2" placeholder="Город" required
+                       data-field="city" />
+              </div>
+
+              <div class="cart__field">
+                <label class="cart__label" for="co-address">Адрес</label>
+                <input class="cart__input" id="co-address" name="address" type="text"
+                       autocomplete="street-address" placeholder="Адрес или пункт выдачи СДЭК"
+                       required data-field="address" />
+              </div>
+
+              <div class="cart__cta">
+                <button class="btn btn--clay" type="submit">Оформить заказ</button>
+                <a class="btn btn--ghost" href="index.html#catalog">Продолжить покупки</a>
+              </div>
+            </form>
+
+            <!-- success state — revealed via .is-visible after a valid submit -->
+            <div class="cart__success" data-checkout-success>
+              <svg class="cart__success-icon" width="44" height="44" viewBox="0 0 24 24" aria-hidden="true">
+                <path class="cart__success-path" stroke-width="2" d="M5 12.5l4.5 4.5L19 7"/>
+              </svg>
+              <h2 class="cart__success-title">Заказ принят</h2>
+              <p class="cart__success-lead">
+                Спасибо — мы написали вам письмо с подтверждением и номером партии.
+              </p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       SHARED FOOTER — identical on index/product/cart.
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brandcol">
+        <a class="footer__brand" href="index.html">Лукоморье</a>
+        <p class="footer__tag">Там, где лес встречает море — каждая вещь хранит тепло рук.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Каталог">
+        <span class="u-label">Каталог</span>
+        <a href="index.html#catalog">Косметика</a>
+        <a href="index.html#catalog">Керамика</a>
+        <a href="index.html#catalog">Наборы</a>
+        <a href="index.html#journal">Журнал</a>
+      </nav>
+
+      <nav class="footer__nav" aria-label="Магазин">
+        <span class="u-label">Магазин</span>
+        <a href="cart.html">Корзина</a>
+        <a href="index.html#contacts">Доставка</a>
+        <a href="index.html#contacts">Контакты</a>
+      </nav>
+
+      <div class="footer__contactcol">
+        <span class="u-label">Связь</span>
+        <a href="tel:+78120000000">+7 812 000-00-00</a>
+        <a href="mailto:hello@lukomorye.ru">hello@lukomorye.ru</a>
+      </div>
+    </div>
+    <div class="container footer__base">
+      <span>© 2026 Лукоморье. Ручная работа, малые партии.</span>
+      <span>Санкт-Петербург · Карельский перешеек</span>
+    </div>
+  </footer>
+
+  <svg class="grain" aria-hidden="true">
+    <filter id="grain-noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter>
+    <rect width="100%" height="100%" filter="url(#grain-noise)"/>
+  </svg>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

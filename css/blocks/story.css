@@ -1,0 +1,113 @@
+/* ============================================================
+   story.css — brand-story / workshop section.
+   Full-bleed craft photo (hands at the wheel) + FLAT warm
+   overlay (solid rgba, NO gradient) + light text — a tactile
+   moment. Asymmetric gallery layout, AA-contrast light copy.
+   Image is a correctly-clamped .u-img (img absolute inset:0 cover).
+   ============================================================ */
+
+.story {
+  position: relative;
+  isolation: isolate;                     /* own stacking context for z-layers */
+  color: var(--on-dark);
+  padding-block: clamp(5rem, 12vw, 9rem);
+  overflow: clip;
+}
+
+/* ---- Full-bleed background photo — cover-clamped (.u-img) ---- */
+.story__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  border-radius: 0;                       /* edge-to-edge, no soft corners */
+  background: var(--ink);                 /* fallback while photo loads */
+}
+/* explicit cover-clamp (belt + braces over .u-img) — never a static img */
+.story__bg > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;            /* keep the hands/wheel in frame */
+}
+
+/* ---- FLAT warm overlay — solid rgba, NO gradient ---- */
+.story__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--overlay-warm);        /* rgba(42,38,34,.56) — flat */
+}
+
+/* ---- Inner: asymmetric gallery column, copy pinned left ---- */
+.story__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: center;
+  gap: var(--col-gap);
+}
+
+.story__copy {
+  grid-column: 1;
+  max-width: 56ch;
+}
+
+/* ---- Eyebrow: gold rule + gold caps on the dark photo ---- */
+.story__eyebrow {
+  color: var(--gold);
+}
+.story__eyebrow::before {
+  background: var(--gold);
+}
+
+/* ---- Title: warm serif, light, generous measure ---- */
+.story__title {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-head);
+  color: var(--on-dark);
+  max-width: 18ch;
+}
+
+/* ---- Body: light copy, AA contrast against flat overlay ---- */
+.story__body {
+  margin-top: var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+.story__body p {
+  color: var(--on-dark);
+  opacity: .9;                            /* stays AA-safe over .56 overlay */
+  line-height: var(--lh-body);
+  max-width: 58ch;
+}
+
+/* ============================================================
+   Reflow — gallery to single column, then tight on phones.
+   ============================================================ */
+
+/* tablet: drop the asymmetric split to one stacked column */
+@media (max-width: 860px) {
+  .story__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .story__copy {
+    grid-column: 1;                       /* same selector reused */
+    max-width: 60ch;
+  }
+}
+
+/* phone (≤390px reflow): trim the third paragraph to keep it tight,
+   no horizontal overflow — full-bleed bg already inside overflow:clip */
+@media (max-width: 640px) {
+  .story {
+    padding-block: clamp(4rem, 16vw, 6rem);
+  }
+  .story__body p:nth-child(n+3) {
+    display: none;                        /* keep the moment tight on mobile */
+  }
+}

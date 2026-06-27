@@ -1,0 +1,125 @@
+/* ============================================================
+   contacts.css — «Лукоморье»
+   BEM block: .contacts
+   Section: #contacts (inside .section — padding-block from base.css)
+   Layout: asymmetric two-column — info left (~5/12), map right (~7/12).
+   Map is a fixed-aspect frame; iframe fills it via aspect-ratio +
+   overflow:clip so the frame never collapses or overflows.
+   ============================================================ */
+
+/* ---- Root layout ---- */
+.contacts {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  column-gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+/* ---- Info column ---- */
+.contacts__info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* list of contact / delivery details */
+.contacts__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;                         /* gaps handled by padding + border-bottom */
+  margin-top: var(--sp-xl);
+  padding: 0;
+}
+
+.contacts__list li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3xs);
+  font-size: var(--fs-body);
+  line-height: var(--lh-snug);
+  color: var(--ink-soft);
+  padding-block: var(--sp-md);
+  border-bottom: var(--bd-hair);
+}
+
+.contacts__list li:first-child {
+  padding-top: 0;
+}
+
+.contacts__list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* label (Montserrat small-caps) within each item */
+.contacts__list .u-label {
+  display: block;
+  margin-bottom: var(--sp-3xs);
+  color: var(--clay);            /* clay accent — warm, reads well on alabaster */
+}
+
+/* links inside the list */
+.contacts__list a {
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: .2em;
+  transition: color var(--dur-fast) var(--ease),
+              text-decoration-color var(--dur-fast) var(--ease);
+}
+.contacts__list a:hover {
+  color: var(--clay-deep);
+  text-decoration-color: var(--clay-deep);
+}
+
+/* ---- Map column ---- */
+/* .contacts__map already carries .u-frame (hairline border + bg + radius).
+   We use aspect-ratio so the box self-sizes; overflow:clip guards the
+   iframe against breaking out of border-radius. The iframe carries
+   width:100%;height:100%;display:block inline — mirrored here for
+   resilience. This is NOT a .u-img — iframes are not <img> — but the
+   same "absolute-fill" principle applies via aspect-ratio. */
+.contacts__map {
+  aspect-ratio: 4 / 3;
+  overflow: clip;
+  border-radius: var(--radius);
+  border: var(--bd-hair);
+  background: var(--alabaster-2);
+  box-shadow: var(--shadow-soft);  /* 1px lift — no heavy shadow */
+}
+
+.contacts__map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ---- Reveal stagger — list leads, map follows ---- */
+.contacts__map[data-reveal] {
+  transition-delay: 120ms;
+}
+
+/* ============================================================
+   TABLET  ≤ 860px — info column gets more room; map below
+   ============================================================ */
+@media (max-width: 860px) {
+  .contacts {
+    grid-template-columns: 1fr;
+    row-gap: var(--sp-xl);
+  }
+
+  .contacts__map {
+    aspect-ratio: 4 / 3;         /* same ratio, full width */
+  }
+}
+
+/* ============================================================
+   MOBILE  ≤ 640px — tighter aspect on small viewports
+   (same selector specificity — no nth-child desktop overrides
+    exist in this block, so no specificity clash)
+   ============================================================ */
+@media (max-width: 640px) {
+  .contacts__map {
+    aspect-ratio: 3 / 2;
+  }
+}

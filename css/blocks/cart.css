@@ -1,0 +1,471 @@
+/* ============================================================
+   cart.css — корзина · «Лукоморье»
+   Two-column asymmetric layout: line-items (wide left) + sticky
+   order-summary (narrow right). Gallery-clean, warm boutique palette.
+   Soft 4px radius · 1px hairlines · NO heavy shadows.
+   Every thumbnail is .u-img (position:absolute cover) — never static.
+   Reveal: blocks toggle .is-revealed ONLY (contract in base.css).
+   Mobile: single-column reflow; same nth-child selectors reused.
+   ============================================================ */
+
+/* ============================================================
+   Cart page shell
+   ============================================================ */
+.cart-page {
+  padding-block: var(--section-gap);
+}
+
+.cart-page__head {
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.cart-page__eyebrow { /* inherits .section__eyebrow from base */ }
+
+.cart-page__title {
+  font-size: var(--fs-h1);
+  margin-top: var(--sp-xs);
+}
+
+/* ---- Two-column layout ---- */
+.cart-page__inner {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  align-items: start;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+/* ============================================================
+   Cart items column
+   ============================================================ */
+.cart__items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* top hairline above the first item */
+.cart__items::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: var(--line);
+  margin-bottom: 0;
+}
+
+/* ---- Single cart row ---- */
+.cart__item {
+  display: grid;
+  grid-template-columns: 88px 1fr auto;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.75rem);
+  padding-block: clamp(1.25rem, 3vw, 1.75rem);
+  border-bottom: 1px solid var(--line);
+  /* reveal */
+  transition:
+    opacity var(--dur-block) var(--ease),
+    transform var(--dur-block) var(--ease);
+}
+
+/* thumbnail — HARD-WON RULE: absolutely-covered inside fixed-height box */
+.cart__thumb {
+  /* .u-img base sets position:relative overflow:clip display:block */
+  flex: none;
+  width: 88px;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  background: var(--alabaster-2);
+}
+/* img inside .cart__thumb must be .u-img child (absolute cover — enforced by base .u-img > img) */
+
+.cart__thumb a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* slight hover lift on thumbnail link */
+.cart__thumb:hover { opacity: .88; }
+
+/* ---- Item meta ---- */
+.cart__meta {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  min-width: 0;
+}
+
+.cart__item-type {
+  /* inherits .u-label */
+  color: var(--sage-deep);
+}
+
+.cart__item-name {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: clamp(1.05rem, .96rem + .4vw, 1.25rem);
+  line-height: var(--lh-snug);
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cart__item-name a {
+  color: var(--ink);
+}
+.cart__item-name a:hover { color: var(--clay-deep); }
+
+.cart__item-note {
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  line-height: 1.45;
+  max-width: 38ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- Qty + price cluster ---- */
+.cart__controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--sp-sm);
+  flex: none;
+}
+
+.cart__price-row {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: var(--fs-price);
+  color: var(--gold-deep);
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+/* qty stepper */
+.cart__qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: clip;
+  height: 36px;
+}
+
+.cart__qty-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--ink);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.cart__qty-btn:hover { background: var(--alabaster-2); color: var(--clay-deep); }
+.cart__qty-btn:focus-visible { outline: 2.5px solid var(--clay); outline-offset: -2px; }
+
+.cart__qty-val {
+  min-width: 2.4ch;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  color: var(--ink);
+  padding-inline: .25em;
+  border-inline: 1px solid var(--line);
+  line-height: 34px;
+  user-select: none;
+}
+
+/* remove button */
+.cart__remove {
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  padding: .3rem .5rem;
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.cart__remove:hover { color: var(--clay-deep); background: color-mix(in srgb, var(--clay) 8%, transparent); }
+.cart__remove svg { flex: none; }
+
+/* ---- Empty state ---- */
+.cart__empty {
+  display: none;            /* cart.js shows when items = 0 */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-md);
+  padding-block: clamp(3rem, 8vw, 5rem);
+}
+.cart__empty.is-visible { display: flex; }
+
+.cart__empty-title {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: var(--fs-h3);
+  color: var(--ink);
+}
+.cart__empty-lead {
+  font-size: var(--fs-body);
+  color: var(--ink-soft);
+  max-width: 42ch;
+  line-height: var(--lh-body);
+}
+
+/* ============================================================
+   Order summary (right sticky column)
+   ============================================================ */
+.cart__summary {
+  position: sticky;
+  top: calc(var(--header-h) + var(--sp-lg));
+  background: var(--alabaster-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+}
+
+.cart__summary-title {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 1.1rem + .5vw, 1.5rem);
+  color: var(--ink);
+  padding-bottom: var(--sp-sm);
+  border-bottom: 1px solid var(--line);
+}
+
+/* line rows: label + value */
+.cart__summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sp-sm);
+  font-size: var(--fs-body);
+  color: var(--ink-soft);
+}
+.cart__summary-row--total {
+  padding-top: var(--sp-sm);
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-price);
+  color: var(--ink);
+}
+.cart__summary-row--total .cart__summary-val {
+  font-family: var(--font-head);
+  font-weight: 600;
+  color: var(--gold-deep);
+}
+
+.cart__summary-label { font-weight: 400; }
+.cart__summary-val   { font-weight: 600; color: var(--ink); white-space: nowrap; }
+
+/* delivery note */
+.cart__delivery-note {
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  line-height: 1.55;
+  padding: .75rem 1rem;
+  background: color-mix(in srgb, var(--sage) 10%, transparent);
+  border-radius: var(--radius);
+  border-left: 2px solid var(--sage);
+}
+
+/* ---- Checkout form inside summary ---- */
+.cart__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-xs);
+}
+
+.cart__field {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+.cart__label {
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--sage-deep);
+}
+.cart__input,
+.cart__textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: .75rem 1rem;
+  background: var(--alabaster);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  transition: border-color var(--dur-fast) var(--ease);
+  resize: none;
+}
+.cart__input::placeholder,
+.cart__textarea::placeholder { color: var(--ink-soft); opacity: .6; }
+.cart__input:focus-visible,
+.cart__textarea:focus-visible { border-color: var(--clay); outline-offset: 1px; }
+.cart__input[aria-invalid="true"],
+.cart__textarea[aria-invalid="true"] { border-color: var(--clay-deep); }
+.cart__textarea { min-height: 80px; line-height: var(--lh-body); }
+
+.cart__field-error {
+  font-size: var(--fs-small);
+  color: var(--clay-deep);
+}
+.cart__field-error[hidden] { display: none; }
+
+/* ---- CTA button row ---- */
+.cart__cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+  margin-top: var(--sp-xs);
+}
+/* btn--clay from base.css → primary checkout; btn--ghost → back to shop */
+
+/* ---- Checkout success state ---- */
+.cart__success {
+  display: none;
+  flex-direction: column;
+  gap: var(--sp-md);
+  text-align: left;
+}
+.cart__success.is-visible { display: flex; }
+
+.cart__success-icon {
+  width: 44px; height: 44px;
+  color: var(--sage);
+}
+.cart__success-path {
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: cart-check-draw .7s var(--ease) .1s forwards;
+}
+@keyframes cart-check-draw { to { stroke-dashoffset: 0; } }
+
+.cart__success-title {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: var(--fs-h3);
+  color: var(--ink);
+}
+.cart__success-lead {
+  font-size: var(--fs-body);
+  color: var(--ink-soft);
+  line-height: var(--lh-body);
+  max-width: 38ch;
+}
+
+/* ============================================================
+   Recommended / «Вам может понравиться» strip
+   Reuses .card from catalog.css — just a narrow 4-col grid
+   ============================================================ */
+.cart__recs {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+}
+
+.cart__recs-head {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+.cart__recs-title {
+  font-size: var(--fs-h3);
+  margin-top: var(--sp-xs);
+}
+
+.cart__recs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+/* ============================================================
+   Responsive — 390px reflow
+   RULE: mobile overrides of desktop nth-child REUSE same selectors
+   ============================================================ */
+
+/* ---- 860px: summary drops below on tablet ---- */
+@media (max-width: 860px) {
+  .cart-page__inner {
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+  .cart__summary {
+    position: static;   /* un-stick so it follows flow below the items */
+    top: auto;
+  }
+  .cart__recs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---- 560px: compact item rows ---- */
+@media (max-width: 560px) {
+  .cart__item {
+    grid-template-columns: 72px 1fr;
+    grid-template-rows: auto auto;
+    gap: .75rem 1rem;
+    align-items: start;
+  }
+  .cart__thumb { width: 72px; }
+
+  /* controls row moves below meta, spanning both columns */
+  .cart__controls {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--sp-xs);
+  }
+  .cart__price-row { order: -1; }
+}
+
+/* ---- 390px: edge-to-edge single column ---- */
+@media (max-width: 420px) {
+  .cart__recs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem .75rem;
+  }
+  .cart__recs-grid > .card:nth-child(1) { grid-column: span 2; }
+  .cart__recs-grid > .card:nth-child(2) { grid-column: span 1; }
+  .cart__recs-grid > .card:nth-child(3) { grid-column: span 1; }
+  .cart__recs-grid > .card:nth-child(4) { grid-column: span 2; }
+
+  .cart__summary { padding: 1.25rem; }
+
+  .cart__qty-btn { width: 32px; height: 32px; }
+  .cart__qty    { height: 32px; }
+  .cart__qty-val { line-height: 30px; }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .cart__success-path { animation: none; stroke-dashoffset: 0; }
+}

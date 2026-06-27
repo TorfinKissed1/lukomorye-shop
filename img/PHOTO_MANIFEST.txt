@@ -1,0 +1,145 @@
+LUKOMORYE BOUTIQUE - STOCK PHOTO MANIFEST
+============================================
+Downloaded: 2026-06-27 | Source: Pexels (https://pexels.com)
+All images: Royalty-free, no credit required (recommended for attribution)
+Format: JPEG | Optimization: 1400px width, compressed
+
+
+HERO IMAGES
+-----------
+hero.jpg
+  ID: 6693557
+  Title: A Top View of a Person Doing Pottery
+  Description: Hands sculpting clay in pottery workshop, top view on wooden table
+  Photographer: cottonbro studio
+  Size: 154KB | Valid JPEG
+  Use: Full-bleed atmospheric craft/cosmetics hero section
+
+workshop.jpg
+  ID: 9736289
+  Title: Woman Crafting Pottery on Wheel
+  Description: Cozy workshop scene with artisan working at pottery wheel with clay
+  Photographer: KoolShooters
+  Size: 383KB | Valid JPEG
+  Use: Full-bleed story background, process/craft narrative
+
+
+PRODUCT SHOTS (Primary)
+-----------------------
+prod-1.jpg
+  ID: 15440777
+  Title: Ceramic Dishes on Shelf
+  Description: Collection of handmade ceramic dishes on rustic wooden shelf
+  Photographer: Oleg Prachuk
+  Size: 256KB | Valid JPEG
+  Use: Handmade ceramic mug/bowl showcase
+
+prod-2.jpg
+  ID: 3735149
+  Title: Natural Skincare Products Collection
+  Description: Organized indoor display of natural soaps and skincare products
+  Photographer: Polina Tankilevitch
+  Size: 114KB | Valid JPEG
+  Use: Cosmetics jar/oil product display
+
+prod-3.jpg
+  ID: 29160138
+  Title: Artisanal Handmade Soap with Lavender and Rosemary
+  Description: Stacked artisanal soaps with herbs, natural skincare showcase
+  Photographer: Carol Pimentel
+  Size: 145KB | Valid JPEG
+  Use: Dried-herb bundle / soap product shot
+
+prod-4.jpg
+  ID: 32212371
+  Title: Handcrafted Ceramic Bowls
+  Description: Collection of handcrafted bowls in artisan pottery studio with soft lighting
+  Photographer: leo asher
+  Size: 91KB | Valid JPEG
+  Use: Ceramic bowl/vessel showcase
+
+prod-5.jpg
+  ID: 33878971
+  Title: Rustic Pottery on Wooden Shelf
+  Description: Handcrafted pottery pieces displayed on rustic wooden shelf
+  Photographer: Finalchoice
+  Size: 90KB | Valid JPEG
+  Use: Additional ceramic product angle
+
+prod-6.jpg
+  ID: 33878963
+  Title: Hands Crafting on Pottery Wheel
+  Description: Close-up of hands working clay on pottery wheel
+  Photographer: Finalchoice
+  Size: 255KB | Valid JPEG
+  Use: Process/hands-on product storytelling
+
+
+PRODUCT SHOTS (Alternate Angles for Hover-Swap)
+-------------------------------------------------
+prod-1b.jpg
+  ID: 8063857
+  Title: Hands Shaping Clay Vase
+  Description: Artisan hands sculpting and shaping a clay vase
+  Photographer: Roman Odintsov
+  Size: 204KB | Valid JPEG
+  Use: Hover-swap alternate for prod-1.jpg (ceramic angle)
+
+prod-2b.jpg
+  ID: 7960115
+  Title: Soaps Arranged Aesthetically on Tray
+  Description: Handcrafted soaps arranged with aesthetic presentation
+  Photographer: Cristian Rojas (Los Muertos Crew)
+  Size: 88KB | Valid JPEG
+  Use: Hover-swap alternate for prod-2.jpg (cosmetics angle)
+
+
+EDITORIAL / LIFESTYLE / JOURNAL
+--------------------------------
+journal-1.jpg
+  ID: 7500299
+  Title: Handcrafted Organic Soaps in Hands
+  Description: Close-up of artisanal soaps held in hands, natural ingredients
+  Photographer: Meruyert Gonullu
+  Size: 112KB | Valid JPEG
+  Use: Editorial/lifestyle care shot, hands-on wellness narrative
+
+journal-2.jpg
+  ID: 6621470
+  Title: Handmade Organic Soaps on White Surface
+  Description: Arranged handmade soaps on clean white background
+  Photographer: Monstera Production (gabby-k)
+  Size: 146KB | Valid JPEG
+  Use: Lifestyle/editorial beauty/wellness content
+
+
+GIFT / SPECIAL
+---------------
+gift.jpg
+  ID: 20368053
+  Title: People Crafting Together (Gift/Collaboration)
+  Description: Two people crafting/working together in collaborative setting
+  Photographer: Ruslan Sikunov
+  Size: 346KB | Valid JPEG
+  Use: Wrapped set / gift narrative / collaborative handmade story
+
+
+ARCHIVE INFORMATION
+--------------------
+Total Files: 13 JPEGs
+Total Size: 2.54 MB
+All files downloaded successfully and verified as valid JPEG images
+Minimum file size met: ALL > 20KB threshold
+Download location: D:\claudeME\lukomorye-shop\img\
+
+Recommended Attribution Style:
+"Photo by [Photographer] on Pexels" (shown in image galleries, footers, or image captions)
+
+
+NOTES
+-----
+- All images licensed under Pexels free license (royalty-free, can be used commercially)
+- Warm, gallery-lit, premium aesthetic maintained across collection
+- Hand-made, artisanal feel consistent with brand identity
+- Images support both product showcase and brand storytelling
+- Hover-swap functionality available for prod-1/prod-1b and prod-2/prod-2b

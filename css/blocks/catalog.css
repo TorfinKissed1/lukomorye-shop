@@ -1,0 +1,187 @@
+/* ============================================================
+   catalog.css — fine-art product card grid
+   varied tiles · hover angle-swap · gold price · add-to-cart SVG check
+   Reused on product.html cross-sell strip.
+   ============================================================ */
+.catalog__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-xl);
+}
+
+.catalog__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3xs);
+}
+.catalog__filter {
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: .55rem .9rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: color var(--dur-fast) var(--ease),
+              background var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+}
+.catalog__filter:hover { color: var(--ink); border-color: var(--line); }
+.catalog__filter.is-active {
+  color: var(--on-dark);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* ---- Grid: varied tile sizes (gallery rhythm) ---- */
+.catalog__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+/* asymmetric spans: some cards wider for a fine-art spread feel */
+.catalog__grid > .card:nth-child(1) { grid-column: span 3; }
+.catalog__grid > .card:nth-child(2) { grid-column: span 3; }
+.catalog__grid > .card:nth-child(3) { grid-column: span 2; }
+.catalog__grid > .card:nth-child(4) { grid-column: span 2; }
+.catalog__grid > .card:nth-child(5) { grid-column: span 2; }
+.catalog__grid > .card:nth-child(6) { grid-column: span 6; }
+
+/* the wide hero-card lays out as photo | body */
+.catalog__grid > .card:nth-child(6) {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: stretch;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  background: var(--alabaster);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: clip;
+}
+.catalog__grid > .card:nth-child(6) .card__media { border-radius: 0; }
+.catalog__grid > .card:nth-child(6) .card__media.u-img--square { aspect-ratio: 16 / 11; }
+.catalog__grid > .card:nth-child(6) .card__body { padding: clamp(1.25rem, 3vw, 2.5rem); align-self: center; }
+.catalog__grid > .card:nth-child(6) .card__name { font-size: var(--fs-h3); }
+
+/* ---- Card ---- */
+.card { display: flex; flex-direction: column; }
+
+.card__media {
+  display: block;
+  border-radius: var(--radius);
+}
+.card__img {
+  transition: opacity var(--dur) var(--ease), transform 1.2s var(--ease);
+}
+.card__img--back { opacity: 0; }
+.card__media:hover .card__img--front,
+.card__media:focus-visible .card__img--front { opacity: 0; }
+.card__media:hover .card__img--back,
+.card__media:focus-visible .card__img--back { opacity: 1; transform: scale(1.04); }
+.card__media:focus-visible { outline-offset: 0; }
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  padding-top: var(--sp-sm);
+}
+.card__type { color: var(--sage-deep); }
+.card__name {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: clamp(1.15rem, 1.05rem + .5vw, 1.5rem);
+  line-height: 1.2;
+}
+.card__name a { color: var(--ink); }
+.card__name a:hover { color: var(--clay-deep); }
+.card__note {
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  line-height: 1.5;
+  max-width: 42ch;
+}
+
+.card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-sm);
+  margin-top: auto;
+  padding-top: var(--sp-xs);
+}
+.card__price {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: var(--fs-price);
+  color: var(--gold-deep);
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+/* add-to-cart with SVG stroke check */
+.card__add {
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  min-height: 44px;
+  padding: .55rem 1rem;
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: background var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+}
+.card__add:hover { background: var(--ink); color: var(--on-dark); border-color: var(--ink); }
+
+.card__check { flex: none; }
+.card__check-path {
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;            /* hidden until added */
+  transition: stroke-dashoffset .5s var(--ease);
+}
+.card__add.is-added { background: var(--sage); color: var(--on-dark); border-color: var(--sage); }
+.card__add.is-added .card__check-path { stroke-dashoffset: 0; }   /* draw the check */
+
+/* ---- Filtered-out card ---- */
+.card.is-hidden { display: none; }
+
+/* ============================================================
+   Responsive — overrides REUSE the same nth-child selectors
+   ============================================================ */
+@media (max-width: 900px) {
+  .catalog__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .catalog__grid > .card:nth-child(1) { grid-column: span 2; }
+  .catalog__grid > .card:nth-child(2) { grid-column: span 2; }
+  .catalog__grid > .card:nth-child(3) { grid-column: span 2; }
+  .catalog__grid > .card:nth-child(4) { grid-column: span 2; }
+  .catalog__grid > .card:nth-child(5) { grid-column: span 2; }
+  .catalog__grid > .card:nth-child(6) { grid-column: span 4; grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .catalog__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 1rem; }
+  .catalog__grid > .card:nth-child(1) { grid-column: span 2; }
+  .catalog__grid > .card:nth-child(2) { grid-column: span 2; }
+  .catalog__grid > .card:nth-child(3) { grid-column: span 1; }
+  .catalog__grid > .card:nth-child(4) { grid-column: span 1; }
+  .catalog__grid > .card:nth-child(5) { grid-column: span 1; }
+  .catalog__grid > .card:nth-child(6) { grid-column: span 2; grid-template-columns: 1fr; }
+  .catalog__grid > .card:nth-child(6) .card__media.u-img--square { aspect-ratio: 4 / 3; }
+  .card__foot { flex-direction: column; align-items: flex-start; gap: .6rem; }
+  .card__add { width: 100%; justify-content: center; }
+}

@@ -1,0 +1,184 @@
+/* ============================================================
+   newsletter.css — «Лукоморье» · BEM block .newsletter
+   Surface: .s-tint (--alabaster-2). No heavy shadows.
+   Two-column asymmetric row → stacks at 680 px.
+   Reveals: .is-revealed only (contract in base.css).
+   No decorative numbering. No gradients. AA contrast.
+   ============================================================ */
+
+/* ---- Block: two-column row, copy left · form right ---- */
+.newsletter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--col-gap);
+  align-items: center;
+}
+
+/* ---- Copy column ---- */
+.newsletter__copy {
+  padding-right: clamp(0rem, 4vw, 3rem);
+}
+
+.newsletter__title {
+  font-family: var(--font-head);
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  line-height: var(--lh-head);
+  color: var(--ink);
+  max-width: 22ch;
+  margin-top: var(--sp-xs);
+}
+
+.newsletter__lead {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-snug);
+  color: var(--ink-soft);
+  max-width: 46ch;
+  margin-top: var(--sp-md);
+}
+
+/* ---- Form column ---- */
+.newsletter__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+}
+
+/* Input + CTA enclosed in a hairline pill */
+.newsletter__row {
+  display: flex;
+  align-items: stretch;
+  gap: var(--sp-2xs);
+  padding: var(--sp-3xs);
+  background: var(--alabaster);
+  border: var(--bd-hair);
+  border-radius: var(--radius);
+}
+
+.newsletter__input {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 48px;
+  padding: 0 var(--sp-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius) - 1px);
+  /* focus handled via :focus-visible below — no outline by default */
+  outline: none;
+}
+
+.newsletter__input::placeholder {
+  color: var(--ink-soft);
+  opacity: .65;
+}
+
+.newsletter__input:focus-visible {
+  outline: 2.5px solid var(--clay);
+  outline-offset: 2px;
+}
+
+.newsletter__input[aria-invalid="true"] {
+  outline: 2.5px solid var(--clay-deep);
+  outline-offset: 2px;
+}
+
+/* CTA button — sits flush inside the row */
+.newsletter__row .btn--clay {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ---- Inline field error ---- */
+.form__error {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  color: var(--clay-deep);
+  padding-left: var(--sp-3xs);
+}
+.form__error[hidden] { display: none; }
+
+/* ---- Success state ---- */
+.newsletter__success {
+  display: inline-flex;
+  align-items: center;
+  gap: .55em;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--sage-deep);
+}
+.newsletter__success[hidden] { display: none; }
+.newsletter__success .icon {
+  flex-shrink: 0;
+  stroke: var(--sage-deep);
+}
+
+/* SVG stroke-dashoffset check draw — triggered by JS adding .is-checked */
+.nl-check-path {
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  transition: stroke-dashoffset .48s var(--ease) .08s;
+}
+.newsletter__success.is-checked .nl-check-path {
+  stroke-dashoffset: 0;
+}
+
+/* ---- Reveal stagger ---- */
+.newsletter__form[data-reveal] {
+  --reveal-delay: 110ms;
+}
+
+/* ============================================================
+   MOBILE — 390 px / 680 px reflow
+   nth-child selectors reused to match any desktop overrides.
+   ============================================================ */
+@media (max-width: 680px) {
+  .newsletter {
+    grid-template-columns: 1fr;
+    row-gap: var(--sp-lg);
+  }
+
+  .newsletter__copy {
+    padding-right: 0;
+  }
+
+  .newsletter__title {
+    max-width: 100%;
+  }
+
+  .newsletter__lead {
+    max-width: 100%;
+  }
+
+  /* Stack input above button on narrow viewports */
+  .newsletter__row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-2xs);
+    padding: var(--sp-2xs);
+  }
+
+  .newsletter__input {
+    width: 100%;
+  }
+
+  .newsletter__row .btn--clay {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ---- Reduced motion: kill check draw ---- */
+@media (prefers-reduced-motion: reduce) {
+  .nl-check-path {
+    transition: none;
+    stroke-dashoffset: 0;
+  }
+}

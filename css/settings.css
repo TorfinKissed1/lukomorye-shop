@@ -1,0 +1,101 @@
+/* ============================================================
+   settings.css — design tokens · «Лукоморье»
+   Boutique НАТУРАЛЬНАЯ КОСМЕТИКА + КЕРАМИКА ручной работы.
+   European-premium, gallery-clean, warm, hand-made.
+   Warm clay / sage / gold palette. NO neon/blue/purple/gradient.
+   Soft 4px radius · 1px hairlines · NO heavy shadows.
+   ============================================================ */
+
+:root {
+  /* ---- Palette ---- */
+  --alabaster:   #f6f1ea;   /* base surface */
+  --alabaster-2: #efe7da;   /* tonal section block */
+  --clay:        #c98a6d;   /* terracotta accent */
+  --clay-deep:   #a96b50;   /* hover / pressed clay */
+  --sage:        #8a9a7b;   /* secondary accent */
+  --sage-deep:   #6f7e62;   /* hover sage */
+  --gold:        #d9b25f;   /* price / CTA highlight */
+  --gold-deep:   #bd9645;   /* AA-safe gold for small text on light */
+  --ink:         #2a2622;   /* primary text */
+  --ink-soft:    #4a443d;   /* secondary text */
+  --on-dark:     #f6f1ea;   /* text on dark / photo overlay */
+  --line:        rgba(42, 38, 34, .14);  /* 1px hairline */
+  --line-soft:   rgba(42, 38, 34, .08);
+  --line-on-dark: rgba(246, 241, 234, .26);
+
+  /* flat warm overlay for full-bleed craft photo (solid rgba, NO gradient) */
+  --overlay-warm: rgba(42, 38, 34, .56);
+
+  /* ---- Type families ---- */
+  --font-head:  'Lora', Georgia, 'Times New Roman', serif;       /* 500/600 + italic */
+  --font-body:  'Mulish', system-ui, -apple-system, sans-serif;  /* 400/600 */
+  --font-label: 'Montserrat', system-ui, sans-serif;             /* 600 small-caps */
+
+  /* ---- Fluid type scale (clamp) ---- */
+  --fs-display: clamp(2.6rem, 1.2rem + 6vw, 5.6rem);    /* hero headline */
+  --fs-h1:      clamp(2.1rem, 1.3rem + 3.4vw, 3.8rem);
+  --fs-h2:      clamp(1.8rem, 1.3rem + 2.2vw, 3rem);
+  --fs-h3:      clamp(1.25rem, 1.05rem + .9vw, 1.6rem);
+  --fs-price:   clamp(1.05rem, .96rem + .4vw, 1.3rem);  /* gold product price */
+  --fs-lead:    clamp(1.12rem, 1rem + .55vw, 1.45rem);
+  --fs-body:    clamp(1rem, .96rem + .18vw, 1.08rem);
+  --fs-small:   clamp(.86rem, .83rem + .12vw, .93rem);
+  --fs-label:   clamp(.7rem, .68rem + .1vw, .78rem);    /* Montserrat caps labels */
+
+  /* line-heights */
+  --lh-display: 1.06;
+  --lh-head:    1.16;
+  --lh-body:    1.66;
+  --lh-snug:    1.4;
+
+  /* tracking */
+  --track-label: .12em;
+
+  /* ---- Spacing scale ---- */
+  --sp-3xs: .25rem;
+  --sp-2xs: .5rem;
+  --sp-xs:  .75rem;
+  --sp-sm:  1rem;
+  --sp-md:  1.5rem;
+  --sp-lg:  2.25rem;
+  --sp-xl:  3.5rem;
+  --sp-2xl: 5rem;
+  --sp-3xl: 7rem;
+
+  /* gallery breathing room between sections */
+  --section-gap: clamp(4rem, 8vw, 6.5rem);
+
+  /* ---- Layout — WIDE ---- */
+  --container: 1280px;
+  --pad-x: clamp(1.25rem, 5vw, 4rem);
+  --col-gap: clamp(1.25rem, 3vw, 2.75rem);
+  --measure: 64ch;
+
+  /* ---- Radius — soft 4px ---- */
+  --radius: 4px;
+  --radius-lg: 6px;
+
+  /* ---- Borders — 1px warm hairlines ---- */
+  --bd-hair:   1px solid var(--line);
+  --bd-strong: 1px solid var(--ink);
+
+  /* ---- Subtle depth (NO heavy shadows) ---- */
+  --shadow-soft: 0 1px 2px rgba(42, 38, 34, .05);
+
+  /* ---- Z layers ---- */
+  --z-grain:      1;
+  --z-header:     60;
+  --z-nav-panel:  70;
+  --z-skip:       100;
+
+  /* ---- Motion ---- */
+  --ease:      cubic-bezier(.22, .61, .25, 1);
+  --dur-fast:  200ms;
+  --dur:       280ms;
+  --dur-head:  .7s;   /* clip-wipe headline reveal */
+  --dur-block: .6s;   /* block fade + rise */
+  --reveal-rise: 14px;
+
+  /* sticky-split product page: header offset */
+  --header-h: 72px;
+}
