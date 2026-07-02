@@ -216,6 +216,17 @@ em, i { font-style: italic; }
   color: var(--ink);
 }
 .btn--gold:hover { background: var(--gold-deep); color: var(--ink); }
+/* light-outline ghost — for use on dark photo overlays (hero) */
+.btn--outline-light {
+  background: transparent;
+  color: var(--on-dark);
+  border-color: var(--line-on-dark);
+}
+.btn--outline-light:hover {
+  background: var(--on-dark);
+  color: var(--ink);
+  border-color: var(--on-dark);
+}
 .btn--block { width: 100%; }
 
 /* ---- Paper grain overlay (single SVG feTurbulence) ---- */
@@ -281,7 +292,6 @@ em, i { font-style: italic; }
   transition:
     opacity var(--dur-block) var(--ease),
     transform var(--dur-block) var(--ease);
-  will-change: opacity, transform;
 }
 [data-reveal].is-revealed {
   opacity: 1;
@@ -294,11 +304,15 @@ em, i { font-style: italic; }
   transition:
     clip-path var(--dur-head) var(--ease),
     opacity var(--dur-head) var(--ease);
-  will-change: clip-path, opacity;
 }
 [data-reveal-head].is-revealed {
   clip-path: inset(0 0 0 0);
   opacity: 1;
+}
+/* once revealed, drop any lingering compositor hint (no ghost-layer seam) */
+[data-reveal].is-revealed,
+[data-reveal-head].is-revealed {
+  will-change: auto;
 }
 
 /* optional per-block stagger (set --reveal-delay inline or in block CSS) */

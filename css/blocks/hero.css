@@ -1,49 +1,83 @@
 /* ============================================================
-   hero.css — asymmetric image-led hero · «Лукоморье»
-   BEM block: .hero / .hero__inner / .hero__copy / .hero__media
-   Reveal: only .is-revealed toggled (contract in base.css).
-   Image: .u-img--tall → position:absolute inset:0 cover (base.css).
-   No heavy shadows · soft 4px radius · 1px hairlines · no gradients.
+   hero.css — full-bleed editorial hero · «Лукоморье»
+   Full-viewport craft photo + FLAT warm overlay (solid rgba) +
+   light typography. Copy pinned left, trust strip along the base.
+   The H1 is NEVER reveal-gated — hero copy shows instantly.
+   Image: .u-img (img absolute inset:0 cover, from base.css).
+   No heavy shadows · no gradients · AA-contrast light copy.
    ============================================================ */
 
-/* ---- Section padding (supplements .section from base.css) ----------- */
 .hero {
-  /* .section already applies padding-block: var(--section-gap).
-     Reduce only the top to let the header breathe without doubling. */
-  padding-top: clamp(2rem, 4vw, 3.5rem);
+  position: relative;
+  isolation: isolate;                 /* own stacking context for z-layers */
+  color: var(--on-dark);
+  min-height: clamp(560px, 82vh, 820px);
+  display: flex;
+  align-items: flex-end;              /* copy + trust anchored toward the base */
+  padding-top: clamp(5rem, 12vh, 8rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  overflow: clip;
 }
 
-/* ---- Wide asymmetric two-column grid ------------------------------- */
+/* ---- Full-bleed background photo — cover-clamped (.u-img) ---- */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  border-radius: 0;
+  background: var(--ink);             /* fallback while photo loads */
+}
+.hero__bg > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+/* ---- FLAT warm overlay — solid rgba, NO gradient ---- */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(30, 26, 22, .62);
+}
+
+/* ---- Inner: copy column + trust strip, full width ---- */
 .hero__inner {
-  display: grid;
-  /* copy column slightly wider to let the long Russian headline breathe */
-  grid-template-columns: 55fr 45fr;
-  align-items: center;
-  gap: clamp(2rem, 5vw, 5rem);
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vw, 3.5rem);
 }
 
-/* ---- Copy column --------------------------------------------------- */
+/* ---- Copy column ---- */
 .hero__copy {
-  /* soft gallery breathing room at the bottom on wide */
-  padding-bottom: clamp(1rem, 2vw, 2rem);
+  max-width: 30ch;
 }
 
-/* eyebrow — inherits .section__eyebrow from base.css; no override needed */
+.hero__eyebrow {
+  color: var(--gold);
+  margin-bottom: var(--sp-sm);
+}
+.hero__eyebrow::before {
+  background: var(--gold);
+}
 
 .hero__title {
   font-size: var(--fs-display);
   line-height: var(--lh-display);
   font-weight: 600;
   letter-spacing: -.02em;
-  color: var(--ink);
-  max-width: 16ch;
-  margin-top: var(--sp-xs);
-  /* small extra kerning relief for Cyrillic at large size */
+  color: var(--on-dark);
+  max-width: 18ch;
   text-wrap: balance;
 }
-/* warm italic accent — clay-deep ensures AA on alabaster (#f6f1ea) */
+/* warm italic accent — light clay stays legible on the dark overlay */
 .hero__title em {
-  color: var(--clay-deep);
+  color: var(--gold);
   font-weight: 500;
   font-style: italic;
 }
@@ -51,12 +85,13 @@
 .hero__lead {
   font-size: var(--fs-lead);
   line-height: var(--lh-snug);
-  color: var(--ink-soft);
-  max-width: 46ch;
+  color: var(--on-dark);
+  opacity: .92;
+  max-width: 48ch;
   margin-top: var(--sp-md);
 }
 
-/* ---- CTA row ------------------------------------------------------- */
+/* ---- CTA row ---- */
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -64,113 +99,61 @@
   margin-top: var(--sp-lg);
 }
 
-/* ---- Trust strip — real data numbers, no decorative counters ------- */
+/* ---- Trust strip — real data numbers along the base ---- */
 .hero__trust {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(.75rem, 2vw, 2rem) clamp(1.5rem, 4vw, 3rem);
-  margin-top: var(--sp-xl);
+  gap: clamp(.75rem, 2vw, 2rem) clamp(2rem, 5vw, 4rem);
   padding-top: var(--sp-md);
-  border-top: var(--bd-hair);
+  border-top: 1px solid var(--line-on-dark);
 }
 .hero__trust li {
   font-size: var(--fs-small);
-  color: var(--ink-soft);
+  color: var(--on-dark);
+  opacity: .9;
   line-height: 1.4;
 }
-/* the number itself — large serif, ink, no numbering decoration */
 .hero__trust strong {
   display: block;
   font-family: var(--font-head);
   font-weight: 600;
-  font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.4rem);
+  font-size: clamp(1.7rem, 1.1rem + 2vw, 2.6rem);
   line-height: 1;
-  color: var(--ink);
+  color: var(--on-dark);
+  opacity: 1;
   letter-spacing: -.015em;
   margin-bottom: .2em;
 }
 
-/* ---- Media column -------------------------------------------------- */
-/* .hero__media wraps a <figure> — position:relative already on <figure> */
-.hero__media {
-  /* fine-art frame: 1px hairline, soft 4px radius, no shadow */
-  border-radius: var(--radius);
-  overflow: clip; /* clip children to radius */
-}
-
-/* .u-img--tall (aspect-ratio: 3/4) is on the inner <span> —
-   base.css handles the absolute cover img.
-   We only set a small border on the outer figure (fine-art look). */
-.hero__media .u-img--tall {
-  /* radius already inherited but reset here explicitly for clarity */
-  border-radius: var(--radius);
-  /* subtle 1px frame, gallery-style */
-  outline: 1px solid var(--line);
-  outline-offset: -1px;
-}
-
-/* figcaption below the photo */
-.hero__cap {
-  margin-top: var(--sp-xs);
-  font-family: var(--font-label);
-  font-weight: 600;
-  font-size: var(--fs-label);
-  letter-spacing: var(--track-label);
-  text-transform: uppercase;
-  color: var(--sage-deep);
-  padding-inline: 2px; /* optical indent to align with photo edge */
-}
-
-/* ---- Reveal stagger for trust items (declare --reveal-delay here) -- */
-/* Trust list is a single [data-reveal]; stagger via CSS on children
-   so base.css reveal contract is not duplicated. */
-.hero__trust li:nth-child(2) { transition-delay: 60ms; }
-.hero__trust li:nth-child(3) { transition-delay: 120ms; }
-
 /* ============================================================
-   MOBILE REFLOW — 860px breakpoint (tablet landscape → stack)
-   SAME selector specificity as desktop nth-child rules above.
+   MOBILE REFLOW — 860px breakpoint
    ============================================================ */
 @media (max-width: 860px) {
-  .hero__inner {
-    grid-template-columns: 1fr;
-    gap: var(--sp-lg);
+  .hero {
+    min-height: clamp(500px, 76vh, 680px);
   }
-
-  /* photo first on mobile — gives the image-led feel on scroll */
-  .hero__media { order: -1; }
-
-  /* portrait ratio is too tall on narrow screens — swap to landscape */
-  .hero__media .u-img--tall {
-    aspect-ratio: 4 / 3;
+  .hero__copy {
+    max-width: 100%;
   }
-
   .hero__title {
-    max-width: 24ch; /* wider wrap on narrow column */
+    max-width: 20ch;
   }
-
   .hero__lead { max-width: 100%; }
-
-  .hero__trust {
-    gap: .75rem 1.5rem;
-  }
 }
 
 /* ============================================================
-   390px (iPhone SE / smallest target) — no horizontal overflow
-   html{overflow-x:clip} + body{overflow-x:hidden} in base.css.
-   Extra guards specific to hero:
+   390px (smallest target) — no horizontal overflow
    ============================================================ */
 @media (max-width: 480px) {
-  .hero__inner {
-    gap: var(--sp-md);
+  .hero {
+    min-height: auto;
+    padding-top: clamp(4rem, 22vh, 6rem);
+    padding-bottom: var(--sp-xl);
   }
-
   .hero__title {
-    font-size: clamp(2rem, 7.5vw, 2.6rem);
-    max-width: 20ch;
+    font-size: clamp(2.1rem, 8.5vw, 2.8rem);
+    max-width: 18ch;
   }
-
   .hero__actions {
     flex-direction: column;
   }
@@ -178,13 +161,7 @@
     width: 100%;
     text-align: center;
   }
-
   .hero__trust {
-    flex-direction: column;
-    gap: var(--sp-sm);
+    gap: var(--sp-md) var(--sp-lg);
   }
-
-  /* same nth-child selectors as above — explicit reuse per spec */
-  .hero__trust li:nth-child(2) { transition-delay: 60ms; }
-  .hero__trust li:nth-child(3) { transition-delay: 120ms; }
 }

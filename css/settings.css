@@ -27,9 +27,9 @@
   --overlay-warm: rgba(42, 38, 34, .56);
 
   /* ---- Type families ---- */
-  --font-head:  'Lora', Georgia, 'Times New Roman', serif;       /* 500/600 + italic */
-  --font-body:  'Mulish', system-ui, -apple-system, sans-serif;  /* 400/600 */
-  --font-label: 'Montserrat', system-ui, sans-serif;             /* 600 small-caps */
+  --font-head:  'Lora', Georgia, 'Times New Roman', serif;         /* 500/600 + italic */
+  --font-body:  'Manrope', system-ui, -apple-system, sans-serif;   /* 400/500/600/700 — livelier, full cyrillic */
+  --font-label: 'Montserrat', system-ui, sans-serif;               /* 600 small-caps */
 
   /* ---- Fluid type scale (clamp) ---- */
   --fs-display: clamp(2.6rem, 1.2rem + 6vw, 5.6rem);    /* hero headline */
@@ -62,11 +62,11 @@
   --sp-2xl: 5rem;
   --sp-3xl: 7rem;
 
-  /* gallery breathing room between sections */
-  --section-gap: clamp(4rem, 8vw, 6.5rem);
+  /* gallery breathing room between sections — denser, structural rhythm */
+  --section-gap: clamp(3rem, 5.5vw, 5rem);
 
   /* ---- Layout — WIDE ---- */
-  --container: 1280px;
+  --container: 1360px;
   --pad-x: clamp(1.25rem, 5vw, 4rem);
   --col-gap: clamp(1.25rem, 3vw, 2.75rem);
   --measure: 64ch;
@@ -83,7 +83,9 @@
   --shadow-soft: 0 1px 2px rgba(42, 38, 34, .05);
 
   /* ---- Z layers ---- */
-  --z-grain:      1;
+  /* grain sits ABOVE the sticky header so its multiply blend is uniform
+     across the whole viewport — no compositing seam behind the header. */
+  --z-grain:      65;
   --z-header:     60;
   --z-nav-panel:  70;
   --z-skip:       100;

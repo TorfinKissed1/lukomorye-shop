@@ -11,7 +11,7 @@
   <!-- Google Fonts: Lora (head) + Mulish (body) + Montserrat (label), cyrillic -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@600&family=Mulish:wght@400;600;700&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@600&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet" />
 
   <link rel="stylesheet" href="css/settings.css" />
   <link rel="stylesheet" href="css/base.css" />
@@ -71,36 +71,36 @@
 
   <main id="main">
 
-    <!-- ============================================================ HERO -->
-    <section class="hero section">
+    <!-- ============================================================ HERO
+         Full-bleed craft photo + flat warm overlay + light typography.
+         Never gate the H1 on reveal — hero copy is always visible. -->
+    <section class="hero">
+      <div class="hero__bg u-img" aria-hidden="true">
+        <img src="img/hero.jpg" width="1600" height="1000" loading="eager" alt="" />
+      </div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+
       <div class="container hero__inner">
         <div class="hero__copy">
-          <span class="section__eyebrow" data-reveal>Косметика · Керамика · Ручная работа</span>
-          <h1 class="hero__title" data-reveal-head>
+          <span class="section__eyebrow hero__eyebrow">Косметика · Керамика · Ручная работа</span>
+          <h1 class="hero__title">
             Там, где лес встречает море&nbsp;— <em>каждая вещь хранит тепло рук</em>
           </h1>
-          <p class="hero__lead" data-reveal>
+          <p class="hero__lead">
             Малые партии натуральной косметики и керамики из деревянной мастерской
             на Карельском перешейке. Честный состав, имя мастера и номер партии — на каждой упаковке.
           </p>
-          <div class="hero__actions" data-reveal>
-            <a class="btn btn--primary" href="#catalog">В каталог</a>
-            <a class="btn btn--ghost" href="#story">О мастерской</a>
+          <div class="hero__actions">
+            <a class="btn btn--clay" href="#catalog">В каталог</a>
+            <a class="btn btn--outline-light" href="#story">О мастерской</a>
           </div>
-          <ul class="hero__trust" data-reveal>
-            <li><strong>7–30</strong> единиц в партии</li>
-            <li><strong>3</strong> мастера и один кот</li>
-            <li><strong>0</strong> отдушек и парабенов</li>
-          </ul>
         </div>
 
-        <figure class="hero__media" data-reveal>
-          <span class="u-img u-img--tall">
-            <img src="img/hero.jpg" width="900" height="1200" loading="eager"
-                 alt="Руки мастера на гончарном круге в мастерской" />
-          </span>
-          <figcaption class="hero__cap">Мастерская · Карельский перешеек</figcaption>
-        </figure>
+        <ul class="hero__trust">
+          <li><strong>7–30</strong> единиц в партии</li>
+          <li><strong>3</strong> мастера и один кот</li>
+          <li><strong>0</strong> отдушек и парабенов</li>
+        </ul>
       </div>
     </section>
 

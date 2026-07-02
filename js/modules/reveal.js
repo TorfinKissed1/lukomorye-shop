@@ -60,6 +60,34 @@ export function initReveal() {
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
+
+  /* 'scrollend' fires once the scroll settles — catches big jumps
+     (End key, scrollbar drag, wheel with a large step, hash navigation)
+     where the throttled 'scroll' handler may have skipped the final frame. */
+  window.addEventListener('scrollend', sweep, { passive: true });
+
+  /* Programmatic jumps (hash deep-link to #contacts, history restore)
+     don't always emit a settling event — sweep on hashchange + pageshow. */
+  window.addEventListener('hashchange', sweep, { passive: true });
+  window.addEventListener('pageshow', sweep, { passive: true });
+
   sweep();
   window.addEventListener('load', sweep, { once: true });
+
+  /* Delayed sweeps catch anything already near the viewport if no
+     scroll/IO event arrived (instant jump, browsers without 'scrollend'). */
+  [400, 1200].forEach((ms) => setTimeout(sweep, ms));
+
+  /* Absolute last resort: if an element is STILL hidden ~2.4s after init
+     (e.g. it loaded fully off-screen and the user never scrolled to it, or
+     a headless/fullPage render never fired scroll), reveal it outright.
+     Nothing must ever stay at opacity:0 permanently. Runs once, then stops. */
+  setTimeout(() => {
+    for (const el of items) {
+      if (!el.classList.contains('is-revealed')) reveal(el);
+    }
+    window.removeEventListener('scroll', onScroll);
+    window.removeEventListener('resize', onScroll);
+    window.removeEventListener('scrollend', sweep);
+  }, 2400);
 }

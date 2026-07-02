@@ -12,7 +12,7 @@
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  background: color-mix(in srgb, var(--alabaster) 84%, transparent);
+  background: var(--alabaster);
   border-bottom: 1px solid transparent;
   transition:
     background var(--dur) var(--ease),
